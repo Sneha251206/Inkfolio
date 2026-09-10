@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1c1b1b",
+                      "primary-fixed": "#afefdd",
+                      "text-muted": "#6B6B6B",
+                      "tertiary-fixed": "#ffdbd1",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-container": "#e89f8c",
+                      "surface-container": "#f0eded",
+                      "background": "#fcf9f8",
+                      "tertiary-container": "#693527",
+                      "secondary-fixed": "#ffdbcf",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "error": "#ba1a1a",
+                      "background-primary": "#FFFFFF",
+                      "surface-dim": "#dcd9d9",
+                      "secondary-fixed-dim": "#ffb59a",
+                      "outline": "#707975",
+                      "primary-container": "#004d40",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-tint": "#29695b",
+                      "inverse-primary": "#94d3c1",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-primary-fixed": "#00201a",
+                      "surface-bright": "#fcf9f8",
+                      "tertiary": "#4e2013",
+                      "on-primary-container": "#7ebdac",
+                      "on-tertiary-fixed": "#370e04",
+                      "surface-variant": "#e5e2e1",
+                      "on-secondary-fixed": "#380d00",
+                      "on-error-container": "#93000a",
+                      "divider": "#E6E6E6",
+                      "surface-container-high": "#eae7e7",
+                      "on-tertiary-fixed-variant": "#6d382a",
+                      "surface": "#fcf9f8",
+                      "tertiary-fixed-dim": "#ffb5a1",
+                      "on-error": "#ffffff",
+                      "background-secondary": "#FAFAFA",
+                      "secondary": "#a83900",
+                      "on-background": "#1c1b1b",
+                      "inverse-surface": "#313030",
+                      "secondary-container": "#fc6018",
+                      "on-primary-fixed-variant": "#065043",
+                      "primary-fixed-dim": "#94d3c1",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#bfc9c4",
+                      "on-secondary-container": "#531800",
+                      "error-container": "#ffdad6",
+                      "primary": "#00342b",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4945"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "12px",
+                      "stack-md": "24px",
+                      "stack-xl": "80px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "20px",
+                      "reading-width": "720px"
+              },
+              "fontFamily": {
+                      "ui-label-md": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Merriweather"
+                      ],
+                      "headline-md": [
+                              "Merriweather"
+                      ],
+                      "body-md": [
+                              "Merriweather"
+                      ],
+                      "display-lg": [
+                              "Merriweather"
+                      ],
+                      "body-lg": [
+                              "Merriweather"
+                      ],
+                      "ui-label-sm": [
+                              "Inter"
+                      ],
+                      "ui-label-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Merriweather"
+                      ]
+              },
+              "fontSize": {
+                      "ui-label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "ui-label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "ui-label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .sidebar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            overflow-y: auto;
+        }
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        
+        @media (max-width: 1023px) {
+            .sidebar-fixed {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-secondary text-on-background font-ui-label-md antialiased min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="sidebar-fixed bg-surface border-r border-divider z-40 hidden lg:flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">InkFolio</span>
+</div>
+<nav class="flex-1 px-4 py-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary-container font-ui-label-md text-ui-label-md rounded-lg font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:bg-surface-variant hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+                Users
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:bg-surface-variant hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md rounded-lg" href="#">
+<span class="material-symbols-outlined">article</span>
+                Content
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:bg-surface-variant hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Finance
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:bg-surface-variant hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md rounded-lg" href="#">
+<span class="material-symbols-outlined">campaign</span>
+                Campaigns
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:bg-surface-variant hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="p-6 border-t border-divider">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close up portrait of an elegant professional woman in a bright, modern office space with subtle lighting. Editorial style photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXlnUg5QtDFNThEP4-r3cvSh8HfLjRypmBkUcjVDBpit6oilVwCnBUs2ntUIBXAWpMlCq4ESpGo20MiepXN1ls9-X_mLr4i8Y8n7HXZClYuV_Lg8K59PbnE1x1eTro0qpKZ5y8JZSS2c7GwXHx0hLxUCz5jbEgve-_vew8NOcAzgVVXoa6JhB_6S2amKVebesrbo5hIoBBBpGtSe9NfGEjCYXNdiZQDZOhEL8yasGjhzw2S9h7quRR"/>
+</div>
+<div>
+<p class="font-ui-label-md text-ui-label-md text-on-surface">Admin User</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">admin@inkfolio.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="main-content flex flex-col">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-30 bg-surface/90 backdrop-blur-sm border-b border-divider px-6 py-4 flex justify-between items-center h-20">
+<div class="flex items-center gap-4 lg:hidden">
+<button class="text-on-surface p-2 hover:bg-surface-variant rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">InkFolio</span>
+</div>
+<div class="hidden lg:flex flex-1 max-w-xl relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-12 pr-4 py-2 bg-surface-variant border-none rounded-full font-ui-label-md text-ui-label-md focus:ring-1 focus:ring-primary-container focus:bg-surface transition-all outline-none" placeholder="Search users, articles, or transactions..." type="text"/>
+</div>
+<div class="flex items-center gap-4 ml-auto">
+<button class="relative p-2 text-text-muted hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary rounded-full font-ui-label-md text-ui-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Report
+                </button>
+</div>
+</header>
+<div class="flex-1 p-6 lg:p-8 max-w-[1400px] w-full mx-auto space-y-8">
+<!-- Page Header -->
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Overview</h1>
+<p class="font-ui-label-md text-ui-label-md text-text-muted mt-1">Platform performance and activity for the last 30 days.</p>
+</div>
+<!-- Summary Stats Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Stat Card 1 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Total Users</p>
+<span class="material-symbols-outlined text-primary-container text-opacity-50">group</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-container transition-colors">12.4k</p>
+<p class="font-ui-label-sm text-ui-label-sm text-primary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +5.2%
+                        </p>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Total Authors</p>
+<span class="material-symbols-outlined text-primary-container text-opacity-50">edit_note</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-container transition-colors">840</p>
+<p class="font-ui-label-sm text-ui-label-sm text-primary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +2.1%
+                        </p>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Total Revenue</p>
+<span class="material-symbols-outlined text-primary-container text-opacity-50">payments</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-container transition-colors">$42.5k</p>
+<p class="font-ui-label-sm text-ui-label-sm text-primary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +12.4%
+                        </p>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Pending Approvals</p>
+<span class="material-symbols-outlined text-secondary text-opacity-50">pending_actions</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-secondary transition-colors">12</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted flex items-center gap-1 mt-1">
+                            Requires review
+                        </p>
+</div>
+</div>
+<!-- Stat Card 5 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Active Ads</p>
+<span class="material-symbols-outlined text-primary-container text-opacity-50">campaign</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-container transition-colors">5</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted flex items-center gap-1 mt-1">
+                            Running normally
+                        </p>
+</div>
+</div>
+<!-- Stat Card 6 -->
+<div class="bg-surface p-5 border border-divider hover:border-outline-variant transition-colors group flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider">Blogs Published</p>
+<span class="material-symbols-outlined text-primary-container text-opacity-50">article</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-container transition-colors">156</p>
+<p class="font-ui-label-sm text-ui-label-sm text-primary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +8%
+                        </p>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Revenue Chart -->
+<div class="bg-surface border border-divider p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-ui-label-lg text-ui-label-lg text-on-surface">Revenue Over Time</h3>
+<button class="text-text-muted hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 relative">
+<!-- Simulated Bar Chart -->
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 30%"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 45%"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 35%"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 60%"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 55%"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors" style="height: 80%"></div>
+<div class="w-full bg-primary-container/40 hover:bg-primary-container/60 transition-colors" style="height: 100%"></div>
+</div>
+<div class="flex justify-between mt-4 border-t border-divider pt-2 font-ui-label-sm text-ui-label-sm text-text-muted">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- User Growth Chart -->
+<div class="bg-surface border border-divider p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-ui-label-lg text-ui-label-lg text-on-surface">User Growth</h3>
+<button class="text-text-muted hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="h-64 relative flex items-center justify-center">
+<!-- Abstract Representation of Line Chart via CSS -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-variant/30 to-transparent z-0"></div>
+<svg class="w-full h-full z-10" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 L20,60 L40,65 L60,30 L80,45 L100,10" fill="none" stroke="#004d40" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<circle cx="100" cy="10" fill="#004d40" r="2" vector-effect="non-scaling-stroke"></circle>
+</svg>
+</div>
+<div class="flex justify-between mt-4 border-t border-divider pt-2 font-ui-label-sm text-ui-label-sm text-text-muted">
+<span>W1</span>
+<span>W2</span>
+<span>W3</span>
+<span>W4</span>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="bg-surface border border-divider">
+<div class="px-6 py-4 border-b border-divider flex justify-between items-center">
+<h3 class="font-ui-label-lg text-ui-label-lg text-on-surface">Recent Activity</h3>
+<a class="font-ui-label-md text-ui-label-md text-primary-container hover:underline" href="#">View All</a>
+</div>
+<ul class="divide-y divide-divider">
+<!-- Activity Item 1 -->
+<li class="px-6 py-4 hover:bg-background transition-colors flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">New author signup: <span class="font-semibold">Elena Rostova</span></p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">elena.r@example.com</p>
+</div>
+<div class="text-right whitespace-nowrap">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">2 mins ago</p>
+</div>
+</li>
+<!-- Activity Item 2 -->
+<li class="px-6 py-4 hover:bg-background transition-colors flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[20px]">publish</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Blog submitted: <span class="font-semibold">"The Future of Minimalist Design"</span></p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">By Marcus Aurelius</p>
+</div>
+<div class="text-right whitespace-nowrap">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">15 mins ago</p>
+</div>
+</li>
+<!-- Activity Item 3 -->
+<li class="px-6 py-4 hover:bg-background transition-colors flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">paid</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Subscription payment received</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">$299.00 - Pro Annual Plan</p>
+</div>
+<div class="text-right whitespace-nowrap">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">1 hour ago</p>
+</div>
+</li>
+<!-- Activity Item 4 -->
+<li class="px-6 py-4 hover:bg-background transition-colors flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">report</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Content flagged for review</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">Article ID: #8492 - Possible plagiarism</p>
+</div>
+<div class="text-right whitespace-nowrap">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">3 hours ago</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio | Editorial Excellence</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#4e2013",
+                        "primary-fixed-dim": "#94d3c1",
+                        "secondary-fixed-dim": "#ffb59a",
+                        "surface-tint": "#29695b",
+                        "on-surface": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "text-muted": "#6B6B6B",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#531800",
+                        "on-surface-variant": "#3f4945",
+                        "primary-container": "#004d40",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed": "#ffdbd1",
+                        "on-tertiary-fixed-variant": "#6d382a",
+                        "tertiary-fixed-dim": "#ffb5a1",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdbcf",
+                        "secondary-container": "#fc6018",
+                        "outline-variant": "#bfc9c4",
+                        "surface-container": "#f0eded",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#707975",
+                        "tertiary-container": "#693527",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary": "#a83900",
+                        "background-primary": "#FFFFFF",
+                        "on-primary-container": "#7ebdac",
+                        "primary": "#00342b",
+                        "background-secondary": "#FAFAFA",
+                        "inverse-surface": "#313030",
+                        "surface": "#fcf9f8",
+                        "on-background": "#1c1b1b",
+                        "inverse-on-surface": "#f3f0ef",
+                        "inverse-primary": "#94d3c1",
+                        "on-tertiary-fixed": "#370e04",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary-fixed-variant": "#065043",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-container": "#e89f8c",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "on-secondary": "#ffffff",
+                        "divider": "#E6E6E6",
+                        "on-primary-fixed": "#00201a",
+                        "on-secondary-fixed": "#380d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "stack-md": "24px",
+                        "gutter": "24px",
+                        "stack-xl": "80px",
+                        "stack-lg": "48px",
+                        "reading-width": "720px",
+                        "stack-sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Merriweather"],
+                        "ui-label-sm": ["Inter"],
+                        "headline-sm": ["Merriweather"],
+                        "display-lg": ["Merriweather"],
+                        "headline-md": ["Merriweather"],
+                        "ui-label-lg": ["Inter"],
+                        "ui-label-md": ["Inter"],
+                        "display-lg-mobile": ["Merriweather"],
+                        "body-md": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "ui-label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "700"}],
+                        "ui-label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "ui-label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+        .editorial-divider {
+            height: 1px;
+            background-color: #E6E6E6;
+            width: 100%;
+        }
+        .content-column {
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-sm border-b border-divider">
+<nav class="flex justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-4">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-on-surface" href="#">InkFolio</a>
+<div class="hidden md:flex gap-6">
+<a class="text-primary font-bold border-b-2 border-primary font-ui-label-lg text-ui-label-lg" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity duration-200 font-ui-label-lg text-ui-label-lg" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity duration-200 font-ui-label-lg text-ui-label-lg" href="#">Write</a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity duration-200 font-ui-label-lg text-ui-label-lg" href="#">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<a class="hidden md:block font-ui-label-lg text-ui-label-lg text-on-surface-variant hover:text-primary" href="#">Sign In</a>
+<a class="bg-primary-container text-on-primary-container px-6 py-2 font-ui-label-lg text-ui-label-lg hover:opacity-90 transition-all rounded-full" href="#">Start Writing</a>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="pt-stack-xl pb-stack-lg px-margin-mobile">
+<div class="max-w-container-max mx-auto text-center">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg max-w-[800px] mx-auto mb-6">
+                    Stories worth paying to write, free to read
+                </h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-[600px] mx-auto mb-10">
+                    A premium digital space for narrative excellence. We value the artisan writer and the curious reader in an age of distraction.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-primary-container text-white px-10 py-4 font-ui-label-lg text-ui-label-lg rounded-full hover:opacity-90 transition-all">
+                        Start Reading
+                    </button>
+<button class="border border-on-surface text-on-surface px-10 py-4 font-ui-label-lg text-ui-label-lg rounded-full hover:bg-surface-container transition-all">
+                        Become an Author
+                    </button>
+</div>
+</div>
+</section>
+<!-- Featured Section (Bento-ish Grid) -->
+<section class="py-stack-lg bg-surface-container-low/50">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+<div class="flex justify-between items-end mb-8">
+<h2 class="font-headline-md text-headline-md">Featured Narratives</h2>
+<a class="text-primary font-ui-label-md text-ui-label-md flex items-center gap-1 hover:underline" href="#">
+                        View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Featured Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] overflow-hidden mb-4 rounded-lg bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A moody, atmospheric photograph of an old typewriter sitting in a sun-drenched minimalist attic studio. The lighting is soft and golden, catching dust motes in the air. The overall color palette is warm earth tones, deep greens, and creamy whites, reflecting a premium editorial aesthetic of quiet focus and intellectual depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkng4PF7IvTdUgS_ddKqs8p7Nx5st5R9B-iHck1sd5S0RId1KYwg9IG8kGOfJR25nefTE0Lt1mx5BHnI-5RSEqM5l42lv1KmPpEsLq9oa_xzubECEe0DcQA5nt5H-T3L8pV7i5YQlnPtwz-1RBAlUqEguA3GTP89vT0E-jIph9FIbtvH-F-4iVRnJxUzTjaCq7UW4_D8S4suGeT7XMutw3_HxOfL632ZvUVoiF2Cwo1cWKSftYoLT6"/>
+</div>
+<div class="space-y-2">
+<span class="inline-block bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-outline">Lifestyle</span>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors">The Lost Art of Deep Contemplation</h3>
+<div class="flex items-center gap-3 pt-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a mature woman with glasses, expressing wisdom and serenity. The portrait is shot against a soft-focus library background with warm lighting. The aesthetic is clean, professional, and sophisticated, using a high-contrast black and white style to emphasize depth and character." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbNlxcGGnNIkWmEJsXuF_PN9fbnb8TS6_zAcpMvlqHjNDQQcCgQRmLnICe-nD-pmvCtZuXcWtWjOiT1OGo-UV1GuMXQAR8UBKOBT9hvzTRsz8NQe03XKp8b-uJaEFiLLvNHi22v0hpjK0N2cLbede9vmPMZE_K_AcmPyth8hWHtlILzinJfbQB4psIEI5WMrrZW9Sy3OF2Ku3AZ97msvGu8RP2sbmpIkjqc3h5SH-fyCOAXLRQ9_MU"/>
+</div>
+<div class="text-ui-label-sm">
+<p class="font-semibold">Elena Vance</p>
+<p class="text-text-muted">12 min read</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] overflow-hidden mb-4 rounded-lg bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A futuristic minimalist architectural structure with clean lines and large glass panels overlooking a serene forest. The morning light is cool and crisp, casting long architectural shadows. The color palette features slate blues, forest greens, and stark whites, embodying a modern tech and design philosophy that values harmony with nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbaYBr3OKM2FS0F-X6v6UnG037gV6Q_F4Ua5LAuYRX767VMtDydwMc1hEIQXll0gWZvURZxWpaWYI1tk57jgo6UpsNAKUa-o-B74---e8Wl2Wvm7D7UouYap3oKtOdUYrNz_VhC98xrJHwC_llpYPVFEh8Y7wsexlXs-Krv17G5arLKlVdobiJKA6Q6sVidumgnzOxOMp65DBvnMZ4XTlmFmT9ojOdDhmqyp9KNcR_HDaBKNfIFKzv"/>
+</div>
+<div class="space-y-2">
+<span class="inline-block bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-outline">Design</span>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors">Architecture for the 22nd Century</h3>
+<div class="flex items-center gap-3 pt-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young male designer with a creative look, wearing a minimalist black turtleneck. The lighting is dramatic and moody, coming from the side to create deep shadows. The image has a grainy, film-like quality that aligns with a high-end, artistic editorial publication style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQPTtrAocJ8aPnk7r889V6mJ8vun96p16SNhVnHwEyMulPyWTA5bH8BvvvQjYlVmPPlNFzTJ400UHoKvWglBIN7dG0jEhun5okS8kgr5AGI4ZGW9xtAU8zFFWyH_y0yFJjz1PFHdupkIW1OM8aBNqjsnWX05tgD_DXigsowvjkBXYbOR6R0iSBaTq-xk7xVGuZJ0TQoZjMZu3WpFeocJPih3efjBIeP12Dbkr4Sr3LlRpVFZwEL7vC"/>
+</div>
+<div class="text-ui-label-sm">
+<p class="font-semibold">Julian Mars</p>
+<p class="text-text-muted">8 min read</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] overflow-hidden mb-4 rounded-lg bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An abstract representation of data and technology using organic, fluid light trails in a deep forest green space. The light trails are thin and elegant, resembling silk threads. The mood is calm and sophisticated, avoiding typical tech-blue tropes for a more premium, intellectual deep green and gold palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbylquM03xFQsSifi4eFma2ABX9SdNF0Yow6q-ebgV_MvGBg54S4ZQ3P5dnjiVktVoe-AMf-tV85-RcVu7PgFfhcg6BcjcHSsFM4w0W2qhKZJ3XFQITgYAvOP1GrEXSalDNSDvle0ndTPYNqCAENhaQo736JZ3cjoTWEevLspgszfIquSvyKF1xwPADp51l8PTrT6HEh0v5pN-UYJBPgqDVnf87--KurgtcM8NtNeolspLeJ7ssKpj"/>
+</div>
+<div class="space-y-2">
+<span class="inline-block bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-outline">Tech</span>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors">Beyond the Silicon: Ethical AI</h3>
+<div class="flex items-center gap-3 pt-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of an intellectual man with a salt-and-pepper beard, looking thoughtfully into the distance. The lighting is natural and bright, suggesting an outdoor setting. The style is honest and unretouched, emphasizing authenticity and expertise suitable for a high-quality journalism platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc_IueHQkJxJqI6yT4NVPdpjqARE9M3QZu5V69VUmEE3mDpCgP1KS4aV8YGIsFGylKH3802MRZKMn0LaFHCOFbD7mc7aEStlNvQSVqpSTilISiwr621f4TiqFFAblfvIdm4WCOO7rJJDSS79yBnProuA9kguOwx_j0zRwROgkyxomq-kB_zMVPGytmMOmtXTdwfcXkvGOmLPOgP6szlSiDKH1OQI1hf-53fHXd3AeuR8sOLTcdHcg0"/>
+</div>
+<div class="text-ui-label-sm">
+<p class="font-semibold">Dr. Aris Thorne</p>
+<p class="text-text-muted">15 min read</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] overflow-hidden mb-4 rounded-lg bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist overhead shot of a healthy, vibrant salad bowl on a white marble table. The colors are dominated by fresh greens, bright oranges, and deep purples. The lighting is high-key and fresh, suggesting health and vitality. The composition is strictly balanced, aligning with a premium editorial design language of clarity and beauty." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfy0g5Aw22ngHHx44XPLUipCWEMsJDzqZxgsTy3rdPDo_vcoZpakHvTP3ehDMPUMcPkvqLZ6F8fNFFULFtgCtYJKgMCrkfssoz5m2sbKAPdZPWNZiEFY93o1ns4ygWlLjpXzNZhzNfWdKeI2UFrIS5-PkzA6eOR9qbo2T6yc3eA_DElEhTYDATuvtbDt-nZQSlZsEWiogUmIVDWKX8F8wdLeNmGApm9Zu6BWQFRYcPoMvjvfLR7tgT"/>
+</div>
+<div class="space-y-2">
+<span class="inline-block bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-outline">Health</span>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors">Metabolism: The Hidden Narrative</h3>
+<div class="flex items-center gap-3 pt-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene woman in her 30s with a natural, healthy glow, smiling softly at the camera. The background is a soft-focus garden. The aesthetic is clean and light-filled, conveying a sense of well-being and approachability that matches high-quality health journalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYR7RL9OVDtGmrsbxcBzGrMCbMx4QB7Q5Q699NZYTn1PeGjoN6LKYZUNZZ_DH2b6s3krpTiv2_EjhU7OYlWX0wHaRNWoUSm_QRHBnejRTS1GFvZ7VxGLxnkosAfZDE59SZ02MpNtQdjgxYH8gc85H4rdZkrJ8DnH2vDLy1GGy2LmwZPLfj-d394gBK1sm4ThGkpGHpwaGeQJAkUPF5mvV79Du1kMrArGDp3iMwDdeBB63PVryBeOyN"/>
+</div>
+<div class="text-ui-label-sm">
+<p class="font-semibold">Sarah Jenks</p>
+<p class="text-text-muted">6 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Explore Section (Category Filters) -->
+<section class="py-stack-md border-b border-divider">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter overflow-x-auto">
+<div class="flex gap-4 items-center whitespace-nowrap py-2">
+<span class="text-ui-label-md font-bold text-on-surface mr-2">Explore Topics:</span>
+<button class="px-6 py-2 rounded-full bg-primary text-white font-ui-label-md">All Stories</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors font-ui-label-md">Tech</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors font-ui-label-md">Lifestyle</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors font-ui-label-md">Business</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors font-ui-label-md">Health</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors font-ui-label-md">Design</button>
+</div>
+</div>
+</section>
+<!-- Latest Articles Feed -->
+<section class="py-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter flex flex-col md:flex-row gap-gutter">
+<!-- Main Feed -->
+<div class="flex-grow max-w-reading-width">
+<h2 class="font-headline-md text-headline-md mb-8">The Latest</h2>
+<div class="space-y-stack-lg">
+<!-- Feed Item 1 -->
+<article class="flex flex-col md:flex-row gap-gutter group">
+<div class="flex-grow space-y-3">
+<div class="flex items-center gap-2 mb-1">
+<img class="w-6 h-6 rounded-full bg-surface-dim" data-alt="A tiny profile thumbnail of a professional writer in a bright setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNdYR3LSkUTNkvbGakmmgdof6emabbSIai2vpEGoGvb26rhSLNZp1Xwb2aDQcSEOMWcpJBhewUaNw-08esYfZkJuD3RZGqxC-5JQkkRL5jjeadLy2SF53JE0QKcvj4Xl5OIodC8vmt0wzVEd3WoDSpNpxQsbHHvSEApB2jDs8fJ7rKh52YU3Vyo90H1JL8hBsBiunpjTyM-bxFOJvw3g0Zvm7mt7u_9slPf57mSAY3oSIcbtfP2RYJ"/>
+<span class="text-ui-label-sm font-semibold">David Foster</span>
+<span class="text-ui-label-sm text-outline">• Oct 24</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors leading-tight">Why we are losing the battle for our own attention</h3>
+<p class="text-text-muted font-body-md line-clamp-3">In a world of infinite scrolls and micro-notifications, the ability to focus for more than ten minutes has become a luxury item. Here is how we reclaim it...</p>
+<div class="flex items-center justify-between pt-4">
+<div class="flex items-center gap-4 text-ui-label-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">pan_tool</span> 2.4k claps</span>
+<span>7 min read</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">bookmark_add</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">share</span></button>
+</div>
+</div>
+</div>
+<div class="w-full md:w-48 h-48 md:h-32 shrink-0 bg-surface-dim rounded-lg overflow-hidden order-first md:order-last">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A conceptual image showing a person surrounded by glowing screens in a dark room, but focusing on a single small candle. The contrast between digital noise and analog light is sharp. The color scheme is deep shadows with sparks of warm yellow and clinical blue, emphasizing a narrative about attention and focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC0whEHQEVu7ncTIjzkknkD0YapSpO9Dt93HPXgDuDUmdLwWB72acEg6Im914BhmtKQCoCnzLoZ-2wYENOD0iIWEw0PBHgd2OVUy79yEGzw7unkNpKDhsfSOhOPYTT80v6Bkju-GsBpkV4L8PA1leo9LI50imZRgzaIHn-71fOdA6WWVspM6CeY0gAdPLfBdaa90ajrV6Yh-JRYzNhLq_yM4-lwdwziT_6xN_wBqVkg5cvp6GbfUXU"/>
+</div>
+</article>
+<div class="editorial-divider"></div>
+<!-- Feed Item 2 -->
+<article class="flex flex-col md:flex-row gap-gutter group">
+<div class="flex-grow space-y-3">
+<div class="flex items-center gap-2 mb-1">
+<img class="w-6 h-6 rounded-full bg-surface-dim" data-alt="A small avatar of a woman with a creative professional appearance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMakWid0ue5Jil3YV6sLRdEIKkL7ntY6lzJwB8oz1n6GlCyXer-8Sd_J7236y45FU2suNhrzcjRTJ-RvgIsJrtbIQzyGXommYsdoNRz6Y8HtgOm5iwUac3NlYEJdmmwHCxA-eIwPyLcS1lYglSpGZb2GW-UDxnSsoohfpJMEWJ4GOpChmyv_jLEgiCuy9-Eq-ApeVyscKJrVCeVLibno5gXFiCpNwbVTlyekG2rLFgP8zf3QlQX-Z6"/>
+<span class="text-ui-label-sm font-semibold">Maya Lin</span>
+<span class="text-ui-label-sm text-outline">• Oct 22</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors leading-tight">The Psychology of Color in Digital Journalism</h3>
+<p class="text-text-muted font-body-md line-clamp-3">How deep greens and off-whites are replacing the aggressive blues of the early web to create spaces of intellectual trust and calm...</p>
+<div class="flex items-center justify-between pt-4">
+<div class="flex items-center gap-4 text-ui-label-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">pan_tool</span> 840 claps</span>
+<span>5 min read</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">bookmark_add</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">share</span></button>
+</div>
+</div>
+</div>
+<div class="w-full md:w-48 h-48 md:h-32 shrink-0 bg-surface-dim rounded-lg overflow-hidden order-first md:order-last">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A beautiful abstract composition of ink droplets dispersing in clear water, creating plumes of deep emerald green and soft grey. The image is captured in high resolution with sharp detail and soft lighting, representing the fluid nature of ideas and design in a premium editorial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMSJBv_lCTDR1ClNkXT8KCoNWwYwbSJwAv3A6Bd8qCVZltz4FTwPgTssclCWw_g3wXj0D_I-aE5axw9NPZeXMsY4PtzR34Y-O16LFi5jJ3SH5Sj71Di8aLN2kd9AikCHnD5SQb3re_kvCFLiNu6oDq3lsnNr2Mz3pe2iL_ODckAK3DSLOrtNY0FhW0-RNoTcRlUTZdXwb4TjYnk0HiLHAxN556AtOaifpGdYiQ6QQ6LqR5WHUlPhXB"/>
+</div>
+</article>
+<div class="editorial-divider"></div>
+<!-- Feed Item 3 -->
+<article class="flex flex-col md:flex-row gap-gutter group">
+<div class="flex-grow space-y-3">
+<div class="flex items-center gap-2 mb-1">
+<img class="w-6 h-6 rounded-full bg-surface-dim" data-alt="A portrait of a male business professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaZs_9js46g8CmSjVPGNrYHhbUnJhkfBxQE0Oz3UrP7kdb6vs02Z7zCQkPhs4t2C7YlDUjwSs1RQbGPxqQtl3SR1ocXJUmV5d78ccxcpgwfM1ypfWfoERE2O-WRsxeLIfpcrVbZEEgX-9q9RbtOmXhx5bPs4riA7damdB4yx14Ib5miA8bhXgkWbzewKarLUvmubEaLJuRVDd7iWzBVzvkZHwbC86nDWRKwcUGju13ToWysHJYPetM"/>
+<span class="text-ui-label-sm font-semibold">Robert H. Chen</span>
+<span class="text-ui-label-sm text-outline">• Oct 19</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm group-hover:text-primary transition-colors leading-tight">The Subscription Paradox: Why we pay for what we value</h3>
+<p class="text-text-muted font-body-md line-clamp-3">As free content becomes increasingly commoditized and automated, the human-led editorial becomes the new luxury good for the discerning mind...</p>
+<div class="flex items-center justify-between pt-4">
+<div class="flex items-center gap-4 text-ui-label-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">pan_tool</span> 1.1k claps</span>
+<span>10 min read</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">bookmark_add</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">share</span></button>
+</div>
+</div>
+</div>
+<div class="w-full md:w-48 h-48 md:h-32 shrink-0 bg-surface-dim rounded-lg overflow-hidden order-first md:order-last">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A close-up shot of high-quality fountain pen nib writing on thick, textured ivory paper. The ink is a rich, dark green. The lighting is focused and warm, emphasizing the physical quality of the writing process and the premium value of handcrafted thought. The style is classic editorial, rich with texture and detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlQihA_7jywhiPJd1LXkPlF38PaUI_nRLIYcvW4M-ICaJvzy-SFPlxoD_1GqQbU0NzSRIHXzWlN4qMXBn4ru5KP0uD5NfWrR38uYhoRXb9PkrcIfO4VtZTRb-mgN5PiqTN8vOcuIr2qF-sOH9nKCDEMBOeBIpkQMG5SKuDiT0xVgO8P4alaY_PmdOmblWFOsi3GRQOctdt0GhuLXOA3JiaqgcnuX0z615upbLxE1xdf9Po4TQ9IZx-"/>
+</div>
+</article>
+</div>
+<div class="mt-12">
+<button class="w-full py-4 border border-divider hover:bg-surface-container-low transition-colors font-ui-label-lg rounded-lg">Load More Articles</button>
+</div>
+</div>
+<!-- Author Spotlight Sidebar -->
+<aside class="hidden lg:block w-80 shrink-0">
+<div class="sticky top-24 space-y-stack-md">
+<div class="bg-surface-container-low p-6 rounded-xl">
+<h2 class="font-headline-sm text-headline-sm mb-6">Author Spotlight</h2>
+<div class="space-y-6">
+<!-- Author 1 -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full bg-surface-dim" data-alt="A portrait of a thoughtful female author with a minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9pwcs5aKBy-wDBfGAC-1naS2zUofkfMpjsX_97Nx1JvndMNHiLYWmrak8bvFwCgLGscc5MpOdFpxeaOSfgkIyr5eegHQtuXDc-29MhnS_EKh7VnxeZFnlT-Udn8g9vjORVHK05sGB895itYpzezsLD82FfrAvBHdD8mJYIagYBL8W9zh5MqLN0c5h_EHePBThRUwAoIdF2Z5fHnkeck-IRVtcl0RtKwpU2AiEy2MPyhKRk79Isdpq"/>
+<div>
+<p class="font-semibold text-ui-label-lg">Elena Vance</p>
+<p class="text-ui-label-sm text-outline">Philosophy &amp; Tech</p>
+</div>
+</div>
+<p class="text-ui-label-sm text-on-surface-variant italic">"Exploring the intersection of human consciousness and digital evolution."</p>
+<div class="flex items-center justify-between">
+<span class="text-ui-label-sm text-text-muted">12.4k followers</span>
+<button class="text-primary font-bold text-ui-label-sm border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all">Follow</button>
+</div>
+</div>
+<div class="editorial-divider"></div>
+<!-- Author 2 -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full bg-surface-dim" data-alt="A portrait of a male author with a sharp, intelligent look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2V8AKnTmjNIsmLGgtKgFZ_jw-O0FfsZaoc3kKPSCRrL_4eJYe4QqK7VBGVQjHYbo4mdJ5MBvBiRXiWkIC1Ar9J2BMbCsMTb3CA9ijov56s6kHJ6o9UjJctZxcnmLKJi3LRTx4K-aiPx6qI3MHf57pErtqWeJQ084nnkrdHvDJmubAWjsT5tiVysUQqVP1XugHayjsQ5AsDBVojmgly-f5n6DVN3mMH9kKnk09iwUCUjOsm2_x0yU0"/>
+<div>
+<p class="font-semibold text-ui-label-lg">Julian Mars</p>
+<p class="text-ui-label-sm text-outline">Modern Design</p>
+</div>
+</div>
+<p class="text-ui-label-sm text-on-surface-variant italic">"Advocating for brutalist simplicity in an overcomplicated world."</p>
+<div class="flex items-center justify-between">
+<span class="text-ui-label-sm text-text-muted">8.9k followers</span>
+<button class="text-primary font-bold text-ui-label-sm border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all">Follow</button>
+</div>
+</div>
+<div class="editorial-divider"></div>
+<!-- Author 3 -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full bg-surface-dim" data-alt="A portrait of a calm, wise woman." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr_a8YPwmHLrwngZ-LOlZx79VGNaYvE0ZyV7hWbY87ZqDKn7CS6EW8vmxkRp0wi9kAziY86rhLRV1hTcu-ujYJ-H5yJfnGFYWtJDIOgsb9EIhmLRUCUNXtJyYPo8VYzjIIJXWcSzZMIRXlychtUoa_5Legt-2nzH3SeMBJhTCXGpTNaqVX27c7RnyzD94zrQELV--J-4riAaoQL4hzYqv7VD5vH0NA1ggzFVXQZXnG94QiYDNe-kWK"/>
+<div>
+<p class="font-semibold text-ui-label-lg">Sarah Jenks</p>
+<p class="text-ui-label-sm text-outline">Health &amp; Wellness</p>
+</div>
+</div>
+<p class="text-ui-label-sm text-on-surface-variant italic">"Evidence-based narratives for a more intentional life."</p>
+<div class="flex items-center justify-between">
+<span class="text-ui-label-sm text-text-muted">21.1k followers</span>
+<button class="text-primary font-bold text-ui-label-sm border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all">Follow</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary text-white p-6 rounded-xl">
+<h3 class="font-headline-sm mb-2">Write for us?</h3>
+<p class="text-ui-label-md mb-4 opacity-90">Join our community of elite authors and get paid for your perspective.</p>
+<button class="w-full py-3 bg-white text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all">Apply to Write</button>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-dim border-t border-divider mt-stack-xl">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-stack-lg gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">InkFolio</span>
+<p class="text-text-muted font-ui-label-md text-ui-label-md max-w-xs text-center md:text-left">
+                    Editorial Excellence in every word. A sanctuary for deep reading and intellectual curiosity.
+                </p>
+<p class="text-text-muted font-ui-label-md text-ui-label-md">© 2024 InkFolio. Editorial Excellence.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+<a class="text-text-muted hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md" href="#">About</a>
+<a class="text-text-muted hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md" href="#">Privacy</a>
+<a class="text-text-muted hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md" href="#">Terms</a>
+<a class="text-text-muted hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md" href="#">Contact</a>
+<a class="text-text-muted hover:text-on-surface transition-colors font-ui-label-md text-ui-label-md" href="#">Newsletter</a>
+</div>
+<div class="flex gap-4">
+<a class="w-10 h-10 flex items-center justify-center rounded-full border border-divider hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full border border-divider hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">rss_feed</span>
+</a>
+</div>
+</div>
+</footer>
+<!-- Reading Progress Bar -->
+<div class="fixed top-0 left-0 h-1 bg-primary-container z-[60] transition-all duration-300" id="progress-bar" style="width: 0%"></div>
+<script>
+        // Simple micro-interaction for reading progress simulation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        });
+
+        // Search bar interaction
+        const searchBtn = document.querySelector('button[data-icon="search"]');
+        searchBtn?.addEventListener('click', () => {
+            // Placeholder for search expansion logic
+            console.log('Search clicked');
+        });
+    </script>
+</body></html>

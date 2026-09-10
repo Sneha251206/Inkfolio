@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio Admin - Payments &amp; Payouts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Merriweather:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1c1b1b",
+                      "primary-fixed": "#afefdd",
+                      "text-muted": "#6B6B6B",
+                      "tertiary-fixed": "#ffdbd1",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-container": "#e89f8c",
+                      "surface-container": "#f0eded",
+                      "background": "#fcf9f8",
+                      "tertiary-container": "#693527",
+                      "secondary-fixed": "#ffdbcf",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "error": "#ba1a1a",
+                      "background-primary": "#FFFFFF",
+                      "surface-dim": "#dcd9d9",
+                      "secondary-fixed-dim": "#ffb59a",
+                      "outline": "#707975",
+                      "primary-container": "#004d40",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-tint": "#29695b",
+                      "inverse-primary": "#94d3c1",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-primary-fixed": "#00201a",
+                      "surface-bright": "#fcf9f8",
+                      "tertiary": "#4e2013",
+                      "on-primary-container": "#7ebdac",
+                      "on-tertiary-fixed": "#370e04",
+                      "surface-variant": "#e5e2e1",
+                      "on-secondary-fixed": "#380d00",
+                      "on-error-container": "#93000a",
+                      "divider": "#E6E6E6",
+                      "surface-container-high": "#eae7e7",
+                      "on-tertiary-fixed-variant": "#6d382a",
+                      "surface": "#fcf9f8",
+                      "tertiary-fixed-dim": "#ffb5a1",
+                      "on-error": "#ffffff",
+                      "background-secondary": "#FAFAFA",
+                      "secondary": "#a83900",
+                      "on-background": "#1c1b1b",
+                      "inverse-surface": "#313030",
+                      "secondary-container": "#fc6018",
+                      "on-primary-fixed-variant": "#065043",
+                      "primary-fixed-dim": "#94d3c1",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#bfc9c4",
+                      "on-secondary-container": "#531800",
+                      "error-container": "#ffdad6",
+                      "primary": "#00342b",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4945"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "12px",
+                      "stack-md": "24px",
+                      "stack-xl": "80px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "20px",
+                      "reading-width": "720px"
+              },
+              "fontFamily": {
+                      "ui-label-md": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Merriweather"
+                      ],
+                      "headline-md": [
+                              "Merriweather"
+                      ],
+                      "body-md": [
+                              "Merriweather"
+                      ],
+                      "display-lg": [
+                              "Merriweather"
+                      ],
+                      "body-lg": [
+                              "Merriweather"
+                      ],
+                      "ui-label-sm": [
+                              "Inter"
+                      ],
+                      "ui-label-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Merriweather"
+                      ]
+              },
+              "fontSize": {
+                      "ui-label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "ui-label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "ui-label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #fcf9f8; /* background */
+            color: #1c1b1b; /* on-background */
+        }
+      </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface/90 backdrop-blur-sm dark:bg-background/90 sticky top-0 w-full z-50 border-b border-divider dark:border-outline-variant flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-4">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface" href="#">InkFolio</a>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant dark:text-outline hover:text-primary font-ui-label-lg text-ui-label-lg transition-opacity duration-200 hover:opacity-80" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary font-ui-label-lg text-ui-label-lg transition-opacity duration-200 hover:opacity-80" href="#">Users</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary font-ui-label-lg text-ui-label-lg transition-opacity duration-200 hover:opacity-80" href="#">Content</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary font-ui-label-lg text-ui-label-lg opacity-70 transition-all duration-150" href="#">Payments</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-variant overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-md">
+<header class="mb-stack-md flex justify-between items-end">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Payments &amp; Payouts</h1>
+<p class="font-body-md text-body-md text-text-muted">Manage platform revenue and author disbursements.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="px-4 py-2 border border-outline-variant text-on-surface font-ui-label-md text-ui-label-md rounded hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export Report
+                </button>
+<button class="px-4 py-2 bg-primary-container text-on-primary-container font-ui-label-md text-ui-label-md rounded hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Manual Entry
+                </button>
+</div>
+</header>
+<!-- Summary Cards -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-stack-lg">
+<div class="bg-background-primary p-6 border border-divider rounded-lg">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider mb-2">Total Revenue (MTD)</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">$124,500.00</h3>
+<div class="mt-4 flex items-center text-[#2e7d32] font-ui-label-sm text-ui-label-sm gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+14% vs last month</span>
+</div>
+</div>
+<div class="bg-background-primary p-6 border border-divider rounded-lg">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider mb-2">Pending Payouts</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">$42,350.00</h3>
+<div class="mt-4 flex items-center text-[#f57c00] font-ui-label-sm text-ui-label-sm gap-1">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+<span>18 authors awaiting payment</span>
+</div>
+</div>
+<div class="bg-background-primary p-6 border border-divider rounded-lg">
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted uppercase tracking-wider mb-2">Processed Payouts (MTD)</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">$82,150.00</h3>
+<div class="mt-4 flex items-center text-text-muted font-ui-label-sm text-ui-label-sm gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>45 authors paid</span>
+</div>
+</div>
+</section>
+<!-- Tabbed Interface -->
+<section class="bg-background-primary border border-divider rounded-lg overflow-hidden">
+<div class="flex border-b border-divider">
+<button class="flex-1 py-4 px-6 text-center font-ui-label-lg text-ui-label-lg text-primary border-b-2 border-primary bg-surface/50">
+                    Incoming Payments
+                </button>
+<button class="flex-1 py-4 px-6 text-center font-ui-label-lg text-ui-label-lg text-text-muted hover:bg-surface-variant transition-colors border-b-2 border-transparent">
+                    Outgoing Payouts
+                </button>
+</div>
+<!-- Incoming Payments Table -->
+<div class="overflow-x-auto p-4">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-divider">
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Transaction ID</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Subscriber</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Author / Publication</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Plan</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Amount</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold">Status</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold text-right">Date</th>
+</tr>
+</thead>
+<tbody class="font-ui-label-md text-ui-label-md text-on-surface">
+<tr class="border-b border-divider hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-mono text-sm text-text-muted">#TXN-84729</td>
+<td class="py-4 px-4">alice.smith@example.com</td>
+<td class="py-4 px-4">The Daily Stoic</td>
+<td class="py-4 px-4">Annual Premium</td>
+<td class="py-4 px-4">$120.00</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#e8f5e9] text-[#2e7d32] text-xs font-semibold">
+                                    Completed
+                                </span>
+</td>
+<td class="py-4 px-4 text-right text-text-muted">Oct 24, 09:41 AM</td>
+</tr>
+<tr class="border-b border-divider hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-mono text-sm text-text-muted">#TXN-84728</td>
+<td class="py-4 px-4">bob.jones@example.com</td>
+<td class="py-4 px-4">Tech Insights</td>
+<td class="py-4 px-4">Monthly Basic</td>
+<td class="py-4 px-4">$15.00</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#fff3e0] text-[#ef6c00] text-xs font-semibold">
+                                    Processing
+                                </span>
+</td>
+<td class="py-4 px-4 text-right text-text-muted">Oct 24, 08:12 AM</td>
+</tr>
+<tr class="border-b border-divider hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-mono text-sm text-text-muted">#TXN-84727</td>
+<td class="py-4 px-4">charlie.d@example.com</td>
+<td class="py-4 px-4">Culinary Adventures</td>
+<td class="py-4 px-4">Annual Premium</td>
+<td class="py-4 px-4">$150.00</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#ffebee] text-[#c62828] text-xs font-semibold">
+                                    Failed
+                                </span>
+</td>
+<td class="py-4 px-4 text-right text-text-muted">Oct 23, 11:20 PM</td>
+</tr>
+<tr class="border-b border-divider hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-mono text-sm text-text-muted">#TXN-84726</td>
+<td class="py-4 px-4">diana.w@example.com</td>
+<td class="py-4 px-4">The Daily Stoic</td>
+<td class="py-4 px-4">Monthly Basic</td>
+<td class="py-4 px-4">$12.00</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#e8f5e9] text-[#2e7d32] text-xs font-semibold">
+                                    Completed
+                                </span>
+</td>
+<td class="py-4 px-4 text-right text-text-muted">Oct 23, 10:05 PM</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-divider flex justify-between items-center bg-surface-container-low">
+<span class="font-ui-label-sm text-ui-label-sm text-text-muted">Showing 1-4 of 1,248 transactions</span>
+<div class="flex gap-2">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-dim w-full mt-stack-xl border-t border-divider dark:border-outline-variant flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-stack-lg gap-gutter">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">InkFolio</span>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-text-muted dark:text-outline hover:text-on-surface font-ui-label-md text-ui-label-md transition-colors duration-200" href="#">About</a>
+<a class="text-text-muted dark:text-outline hover:text-on-surface font-ui-label-md text-ui-label-md transition-colors duration-200" href="#">Privacy</a>
+<a class="text-text-muted dark:text-outline hover:text-on-surface font-ui-label-md text-ui-label-md transition-colors duration-200" href="#">Terms</a>
+<a class="text-text-muted dark:text-outline hover:text-on-surface font-ui-label-md text-ui-label-md transition-colors duration-200" href="#">Contact</a>
+<a class="text-text-muted dark:text-outline hover:text-on-surface font-ui-label-md text-ui-label-md transition-colors duration-200" href="#">Newsletter</a>
+</div>
+<span class="font-body-md text-body-md text-primary dark:text-primary-fixed">© 2024 InkFolio. Editorial Excellence.</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio - Reader Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00342b",
+                        "on-secondary-container": "#531800",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#afefdd",
+                        "secondary-container": "#fc6018",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-background": "#1c1b1b",
+                        "surface": "#fcf9f8",
+                        "outline-variant": "#bfc9c4",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "tertiary-fixed-dim": "#ffb5a1",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#29695b",
+                        "secondary-fixed": "#ffdbcf",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#004d40",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed": "#380d00",
+                        "on-error-container": "#93000a",
+                        "secondary": "#a83900",
+                        "tertiary": "#4e2013",
+                        "background-secondary": "#FAFAFA",
+                        "on-tertiary-fixed-variant": "#6d382a",
+                        "on-primary-fixed": "#00201a",
+                        "divider": "#E6E6E6",
+                        "tertiary-fixed": "#ffdbd1",
+                        "on-primary-container": "#7ebdac",
+                        "on-surface": "#1c1b1b",
+                        "inverse-primary": "#94d3c1",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface-variant": "#3f4945",
+                        "background-primary": "#FFFFFF",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-fixed-dim": "#ffb59a",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#313030",
+                        "surface-container": "#f0eded",
+                        "surface-variant": "#e5e2e1",
+                        "outline": "#707975",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "text-muted": "#6B6B6B",
+                        "on-tertiary-fixed": "#370e04",
+                        "on-tertiary-container": "#e89f8c",
+                        "tertiary-container": "#693527",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-primary-fixed-variant": "#065043"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-xl": "80px",
+                        "stack-lg": "48px",
+                        "gutter": "24px",
+                        "reading-width": "720px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Merriweather"],
+                        "body-md": ["Merriweather"],
+                        "ui-label-md": ["Inter"],
+                        "headline-md": ["Merriweather"],
+                        "body-lg": ["Merriweather"],
+                        "ui-label-sm": ["Inter"],
+                        "headline-sm": ["Merriweather"],
+                        "ui-label-lg": ["Inter"],
+                        "display-lg-mobile": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "ui-label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+                        "body-lg": ["20px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "ui-label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "ui-label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="bg-surface/90 backdrop-blur-sm dark:bg-background/90 text-primary dark:text-on-primary-fixed sticky top-0 w-full z-50 border-b border-divider dark:border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-4">
+<a class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface hover:opacity-80 transition-opacity duration-200" href="#">
+                InkFolio
+            </a>
+<nav class="hidden md:flex items-center gap-6 font-ui-label-lg text-ui-label-lg">
+<a class="text-on-surface-variant dark:text-outline hover:text-primary hover:opacity-80 transition-opacity duration-200" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary hover:opacity-80 transition-opacity duration-200" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary hover:opacity-80 transition-opacity duration-200" href="#">Write</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary hover:opacity-80 transition-opacity duration-200" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="search" class="text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="hidden md:flex items-center gap-4">
+<button class="font-ui-label-md text-ui-label-md text-on-surface hover:opacity-80 transition-opacity duration-200">Sign In</button>
+<button class="font-ui-label-md text-ui-label-md bg-primary-container text-on-primary rounded px-4 py-2 hover:opacity-80 transition-opacity duration-200">Start Writing</button>
+</div>
+<!-- User Avatar / Dropdown Trigger (Mobile) -->
+<button class="w-8 h-8 rounded-full overflow-hidden border border-divider md:hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close up, high quality studio portrait of a young professional wearing glasses, looking confident in soft, even light, set against a neutral gray background. The image has a clean, modern aesthetic suitable for a premium editorial platform profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXZJtAzNHktDJzbTDcvlaVdK1UiQhGr82L0E4FNtGVsQdbRyDbtPN17N5xGplsh73cvtbs8P5tX3kUA3YFHPryAxbRyR40sXI63r0R0c7hlrEVpleyGtl74tfKMkEEUEvBHqtoWO1Ur90YKqjNqBN-KsDp_3ZfZD9mxkOVnrgg0wU_byUvW-fwXg9xMFII9PB_ObBVy1OdzZ7tJTCr8GC_GzdHHT7XBIO0oi8xv6YSTQnnH-Ym_aS1"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-reading-width mx-auto px-margin-mobile md:px-0 py-stack-md flex flex-col gap-stack-lg">
+<!-- Profile Header -->
+<section class="flex flex-col relative w-full pt-16">
+<!-- Cover Banner Strip -->
+<div class="absolute top-0 left-0 right-0 h-32 bg-surface-container-low rounded-t-lg -z-10 w-[calc(100%+40px)] -ml-[20px] md:w-full md:ml-0"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-8 px-4 md:px-0">
+<div class="flex items-end gap-6">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-surface bg-surface-container shrink-0 shadow-sm relative">
+<img alt="Profile Picture" class="w-full h-full object-cover" data-alt="A high-quality, professional headshot of an individual with short dark hair, wearing a simple textured linen shirt. The portrait is taken in soft, natural daylight with a shallow depth of field, blurring out a minimalist background, fitting an elegant editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBA2blixLCVWhdReo8dT6h45Hpik1uG-OBfxGe37j2jJ425LrwOXj1FdmSdk3mH233Jg6_lBS8IxDGHiu3g2vOPUAnMx7rDRXc04-fSeLBI7OPbrTYnED1cuUb9AyNLXtU0hevObcBMpr4-JnvSym2aSlmguuZikzXMRcVOSUUIS8TpfR-B-lAUAeI2cHBOFQmRgP4AUgCYElnJVGVwX6XAzi6NdDdSXXbX3JPGO_yvLwhlgYgugI1"/>
+</div>
+<div class="pb-2">
+<h1 class="font-headline-md text-headline-md text-on-surface m-0">Eleanor Vance</h1>
+<p class="font-ui-label-md text-ui-label-md text-on-surface-variant">@eleanorreads</p>
+</div>
+</div>
+<button class="font-ui-label-md text-ui-label-md text-on-surface border border-outline rounded px-4 py-2 hover:bg-surface-variant transition-colors duration-200 self-start md:self-center mt-4 md:mt-0">
+                    Edit Profile
+                </button>
+</div>
+<div class="mt-stack-sm px-4 md:px-0">
+<p class="font-body-md text-body-md text-on-surface-variant max-w-prose">
+                    Avid reader of contemporary fiction, design theory, and obscure historical biographies. Collecting words and ideas.
+                </p>
+<div class="flex flex-wrap gap-4 mt-4 font-ui-label-md text-ui-label-md text-on-surface-variant">
+<span><strong class="text-on-surface">24</strong> Following</span>
+<span><strong class="text-on-surface">112</strong> Followers</span>
+<span class="flex items-center gap-1 text-text-muted"><span class="material-symbols-outlined text-[16px]">calendar_today</span> Member since Oct 2023</span>
+</div>
+</div>
+</section>
+<!-- Tabs -->
+<nav class="border-b border-divider flex overflow-x-auto no-scrollbar gap-8 font-ui-label-lg text-ui-label-lg px-4 md:px-0">
+<button class="pb-3 text-primary-container font-bold border-b-2 border-primary-container whitespace-nowrap">Reading History</button>
+<button class="pb-3 text-on-surface-variant hover:text-primary transition-colors duration-200 whitespace-nowrap">Bookmarks</button>
+<button class="pb-3 text-on-surface-variant hover:text-primary transition-colors duration-200 whitespace-nowrap">Following</button>
+<button class="pb-3 text-on-surface-variant hover:text-primary transition-colors duration-200 whitespace-nowrap">Account Settings</button>
+</nav>
+<!-- Tab Content: Reading History -->
+<section class="flex flex-col gap-6 px-4 md:px-0">
+<!-- Article Item 1 -->
+<article class="flex flex-col-reverse md:flex-row gap-6 pb-6 border-b border-divider group cursor-pointer">
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="A tiny circular avatar showing an abstract ink wash painting in deep greens and blacks, resembling a distant forest landscape, serving as an elegant author profile picture for a minimalist editorial publication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzd_Ey7LzcgloTsHz_RAS56BydhfT7Vu19ZBK5qjvGcKQr5D9HmcmvAXPKe1jXyBoEAF3CqIR4CdXgqL3-DRCeDFufjmYqqQEORWzcu9JULp2AEcJTwNJ-Hy7F8TMH5-R5c5i3_dmH2df0vsDmfDqXN23yYLV11SKMpxtDa46eHHbt1oCvYGn2dBzN0ArXJrvS60I5Mwn2Sh03jk98oGnLBKMm3VnvJjfKPYVzbRqtZZ7O7m6rzE71"/>
+<span class="font-ui-label-sm text-ui-label-sm text-on-surface">Julian Barnes</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary-container transition-colors duration-200 mb-2">
+                            The Architecture of Silence: Designing for Focus in a Noisy World
+                        </h2>
+<p class="font-body-md text-body-md text-text-muted line-clamp-2 md:line-clamp-3">
+                            An exploration into how modern spaces—both physical and digital—can be intentionally structured to cultivate deep thought and quietude amidst constant stimulation.
+                        </p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-3 font-ui-label-sm text-ui-label-sm text-on-surface-variant">
+<span class="bg-surface-container px-2 py-1 rounded text-on-surface">Design</span>
+<span>Oct 12</span>
+</div>
+<span class="material-symbols-outlined text-primary-container" title="Read">check_circle</span>
+</div>
+</div>
+<div class="w-full md:w-[200px] h-[150px] shrink-0 rounded overflow-hidden">
+<img alt="Article Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist architectural interior featuring a single wooden chair next to a large window casting geometric shadows on a smooth concrete floor. The lighting is serene and natural, creating a mood of absolute quiet and focused calm, in a high-end editorial photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAllS5a5I5OAFwPdSeL0MhxWzJab-Yd6TVc3tS0497lLjTHbMQy3_l8Qk1LsW0yjNX5VxrBGSNTK_zTsGgwNjr9gyRX6hIZhq3ZQgDv4JJm1dp7DYKT3TgfKmFvj7mBNPKzclNLCR4Vj5LJ7TNzxln5aYJcv94-tXfJGNB9ZXkyatOA2-3cSwxym4yG0Xqg6X8fGYJ_M8d9tk-gwESKpem01M_Sk4haUX5ZsllvQ53d5sLAW8nPZxTj"/>
+</div>
+</article>
+<!-- Article Item 2 -->
+<article class="flex flex-col-reverse md:flex-row gap-6 pb-6 border-b border-divider group cursor-pointer">
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="A small circular avatar featuring a crisp, monochrome line drawing of a stylized coffee cup on a stark white background, reflecting a minimalist lifestyle branding aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQWXYxLrPBSf9zTjykTkT4wazi5_akFTCjRuqt6P5q20O0n5-skzA-rs5jIdE3dWTGxhfgtrX-kFJrmmt4hgpRVldGTxAaIbKcsecPUX2_aS0E5D9POANDGECJfzSl8bhiBN0felo0VuKkUjmfMmiUt4gurTVFml_b675YQQX4QmJJcCISIiTLTi59dA4JrcadMnnLyPyG4wWIWy6CNQV22dHQXgEHQZYXSSXmUfkYcU7obiDhi-Zh"/>
+<span class="font-ui-label-sm text-ui-label-sm text-on-surface">Clara Bow</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary-container transition-colors duration-200 mb-2">
+                            Notes on a Slow Morning Routine
+                        </h2>
+<p class="font-body-md text-body-md text-text-muted line-clamp-2 md:line-clamp-3">
+                            Resisting the urge to optimize every waking hour. A personal essay on the merits of lingering over coffee, reading printed paper, and letting the day begin at its own pace.
+                        </p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-3 font-ui-label-sm text-ui-label-sm text-on-surface-variant">
+<span class="bg-surface-container px-2 py-1 rounded text-on-surface">Lifestyle</span>
+<span>Oct 08</span>
+</div>
+<span class="material-symbols-outlined text-primary-container" title="Read">check_circle</span>
+</div>
+</div>
+<div class="w-full md:w-[200px] h-[150px] shrink-0 rounded overflow-hidden">
+<img alt="Article Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully styled flat lay photograph showing a ceramic mug of dark coffee resting on an open book with worn pages, next to a pair of reading glasses, bathed in soft, warm morning light on a rustic wooden table. The aesthetic is cozy, calm, and deeply editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRigDcTdgi1PEl6xeW1vif6KQ3w6uoXM8LMtvYCo-L6UtL7qK92hv2XTNhRen7b9C8lvEzCdIJSLhi11numKINwwVY1tCTpMf4Gsm0zpI_vh3QuBe5gCGqHiy4Y1GNqLAuilsAgQap6nHcAol1zqb5GRZ1JMZ7ejzh9GxT4QV_fMNu-O-cc43300TeE10UQoNTWWOpJFOu0jj329SOdSpoSOicYCJzOymridemJuOYUaz3cIdn0Kuz"/>
+</div>
+</article>
+<!-- Article Item 3 -->
+<article class="flex flex-col-reverse md:flex-row gap-6 pb-6 border-b border-divider group cursor-pointer">
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="A tiny circular avatar displaying a macro shot of mechanical typewriter keys in sharp focus with a shallow depth of field, evoking classic journalism and tech history." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS2oNyzDLo2-hXxsUV9bXkfBvmD0akVOHdve3_JIbhHCayXU1Qw3Q_g97CwmBcwE5CZOlTxlauyptKlOfT1cuvOFwA5f9C2qZuDNAqsuPcrc0EiQBox_6KajRhXLEfFVR_MjyWBZknRSA8EitxMGEuGi6Zj5Dm1o57L2OGQQn5tD8ZgENJAjueOEfowa6TY4Lc5LJDqaCGJEDHFDtrqx7PXTK-Vwty8REsJ3OgHJAsAzqyz7XincSs"/>
+<span class="font-ui-label-sm text-ui-label-sm text-on-surface">Marcus Chen</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary-container transition-colors duration-200 mb-2">
+                            The Lost Art of Digital Typography
+                        </h2>
+<p class="font-body-md text-body-md text-text-muted line-clamp-2 md:line-clamp-3">
+                            How we traded craftsmanship for convenience in web design, and why a return to thoughtful, grid-based typographic scales is necessary for the modern reading experience.
+                        </p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-3 font-ui-label-sm text-ui-label-sm text-on-surface-variant">
+<span class="bg-surface-container px-2 py-1 rounded text-on-surface">Tech</span>
+<span>Sep 29</span>
+</div>
+<span class="material-symbols-outlined text-primary-container" title="Read">check_circle</span>
+</div>
+</div>
+<div class="w-full md:w-[200px] h-[150px] shrink-0 rounded overflow-hidden">
+<img alt="Article Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-contrast macro photograph of vintage metal letterpress blocks neatly arranged, forming blurred abstract shapes. The image uses stark black and white tones with a subtle silver sheen, presenting a sophisticated, textured look suitable for an article on typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1Pdv6giyCuuhaA0G6mEMyIIXRsdJ6UYXeLBm9K6bKt8PTZWxXy1kA-5xxMpC5NKvkidY7RUHzcITitRWqh7u-cyBj9h-NkPvxKlNp9I8KlYH78oU1yfw6542-iYJoTK-Hoqbu6q42LCxDDuRqds9e4hYvvr0aB-csW3eujAqTt9ALalKWLbX3Lol8YN76H3pEbAiwczMpjldF225L-F5z2gKrleX12-vZVLdbB1JS5fOe6430iGWs"/>
+</div>
+</article>
+<div class="flex justify-center mt-4">
+<button class="font-ui-label-md text-ui-label-md text-on-surface-variant hover:text-primary hover:underline underline-offset-4 transition-all py-2">Load More History</button>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-low dark:bg-surface-dim text-primary dark:text-primary-fixed w-full mt-stack-xl border-t border-divider dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto py-stack-lg gap-gutter font-body-md text-body-md">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">
+                © 2024 InkFolio. Editorial Excellence.
+            </span>
+<nav class="flex flex-wrap justify-center gap-4 font-ui-label-md text-ui-label-md">
+<a class="text-text-muted dark:text-outline hover:text-primary transition-colors duration-200" href="#">About</a>
+<a class="text-text-muted dark:text-outline hover:text-primary transition-colors duration-200" href="#">Privacy</a>
+<a class="text-text-muted dark:text-outline hover:text-primary transition-colors duration-200" href="#">Terms</a>
+<a class="text-text-muted dark:text-outline hover:text-primary transition-colors duration-200" href="#">Contact</a>
+<a class="text-text-muted dark:text-outline hover:text-primary transition-colors duration-200" href="#">Newsletter</a>
+</nav>
+</div>
+</footer>
+</body></html>

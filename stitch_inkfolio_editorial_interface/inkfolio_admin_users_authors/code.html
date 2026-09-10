@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio Admin - User &amp; Author Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1c1b1b",
+                      "primary-fixed": "#afefdd",
+                      "text-muted": "#6B6B6B",
+                      "tertiary-fixed": "#ffdbd1",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-container": "#e89f8c",
+                      "surface-container": "#f0eded",
+                      "background": "#fcf9f8",
+                      "tertiary-container": "#693527",
+                      "secondary-fixed": "#ffdbcf",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "error": "#ba1a1a",
+                      "background-primary": "#FFFFFF",
+                      "surface-dim": "#dcd9d9",
+                      "secondary-fixed-dim": "#ffb59a",
+                      "outline": "#707975",
+                      "primary-container": "#004d40",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-tint": "#29695b",
+                      "inverse-primary": "#94d3c1",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-primary-fixed": "#00201a",
+                      "surface-bright": "#fcf9f8",
+                      "tertiary": "#4e2013",
+                      "on-primary-container": "#7ebdac",
+                      "on-tertiary-fixed": "#370e04",
+                      "surface-variant": "#e5e2e1",
+                      "on-secondary-fixed": "#380d00",
+                      "on-error-container": "#93000a",
+                      "divider": "#E6E6E6",
+                      "surface-container-high": "#eae7e7",
+                      "on-tertiary-fixed-variant": "#6d382a",
+                      "surface": "#fcf9f8",
+                      "tertiary-fixed-dim": "#ffb5a1",
+                      "on-error": "#ffffff",
+                      "background-secondary": "#FAFAFA",
+                      "secondary": "#a83900",
+                      "on-background": "#1c1b1b",
+                      "inverse-surface": "#313030",
+                      "secondary-container": "#fc6018",
+                      "on-primary-fixed-variant": "#065043",
+                      "primary-fixed-dim": "#94d3c1",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#bfc9c4",
+                      "on-secondary-container": "#531800",
+                      "error-container": "#ffdad6",
+                      "primary": "#00342b",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4945"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "12px",
+                      "stack-md": "24px",
+                      "stack-xl": "80px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "20px",
+                      "reading-width": "720px"
+              },
+              "fontFamily": {
+                      "ui-label-md": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Merriweather"
+                      ],
+                      "headline-md": [
+                              "Merriweather"
+                      ],
+                      "body-md": [
+                              "Merriweather"
+                      ],
+                      "display-lg": [
+                              "Merriweather"
+                      ],
+                      "body-lg": [
+                              "Merriweather"
+                      ],
+                      "ui-label-sm": [
+                              "Inter"
+                      ],
+                      "ui-label-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Merriweather"
+                      ]
+              },
+              "fontSize": {
+                      "ui-label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "ui-label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "ui-label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      }
+              }
+            },
+          }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background-primary');
+            color: theme('colors.on-surface');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Nav shell is hidden as this is a specific administrative interface that doesn't fit the global navigation schema for the end-user facing app. -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-md flex gap-gutter flex-col lg:flex-row">
+<!-- Left Nav (Local Admin Nav) -->
+<aside class="w-full lg:w-64 flex-shrink-0 border-b lg:border-b-0 lg:border-r border-divider pb-stack-md lg:pb-0 lg:pr-gutter hidden lg:block">
+<h2 class="font-headline-sm text-headline-sm mb-stack-md text-on-surface">Admin</h2>
+<nav class="space-y-stack-sm flex flex-col">
+<a class="font-ui-label-md text-ui-label-md text-on-surface-variant hover:text-primary py-2 flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">dashboard</span>
+                    Dashboard
+                </a>
+<a class="font-ui-label-md text-ui-label-md text-primary font-bold py-2 border-l-2 border-primary pl-2 -ml-2 flex items-center gap-2 bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-primary">group</span>
+                    Users &amp; Authors
+                </a>
+<a class="font-ui-label-md text-ui-label-md text-on-surface-variant hover:text-primary py-2 flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">article</span>
+                    Content Moderation
+                </a>
+<a class="font-ui-label-md text-ui-label-md text-on-surface-variant hover:text-primary py-2 flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">payments</span>
+                    Payouts
+                </a>
+<a class="font-ui-label-md text-ui-label-md text-on-surface-variant hover:text-primary py-2 flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">settings</span>
+                    Platform Settings
+                </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col gap-stack-xl w-full min-w-0">
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-sm border-b border-divider pb-stack-sm">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">User Management</h1>
+<p class="font-body-md text-body-md text-text-muted mt-2">Manage all registered users, authors, and review incoming author applications.</p>
+</div>
+</header>
+<!-- Section 1: User Management Table -->
+<section class="flex flex-col gap-stack-md w-full">
+<!-- Filter Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-background-secondary p-4 rounded-DEFAULT border border-divider w-full">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-background-primary border-b border-divider hover:border-outline focus:border-primary focus:ring-0 font-ui-label-md text-ui-label-md text-on-surface placeholder:text-text-muted transition-colors rounded-none outline-none" placeholder="Search users by name or email..." type="text"/>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0">
+<select class="bg-background-primary border-b border-divider hover:border-outline focus:border-primary focus:ring-0 font-ui-label-sm text-ui-label-sm text-on-surface py-2 px-3 outline-none rounded-none cursor-pointer">
+<option>All Roles</option>
+<option>Reader</option>
+<option>Author</option>
+</select>
+<select class="bg-background-primary border-b border-divider hover:border-outline focus:border-primary focus:ring-0 font-ui-label-sm text-ui-label-sm text-on-surface py-2 px-3 outline-none rounded-none cursor-pointer">
+<option>All Status</option>
+<option>Active</option>
+<option>Suspended</option>
+</select>
+<button class="font-ui-label-sm text-ui-label-sm border border-divider text-on-surface hover:bg-surface-container py-2 px-4 rounded-DEFAULT transition-colors whitespace-nowrap flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                            More Filters
+                        </button>
+</div>
+</div>
+<!-- Table Container (Horizontal Scroll for small screens) -->
+<div class="overflow-x-auto w-full border border-divider rounded-DEFAULT bg-background-primary">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-divider">
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider">User</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider">Role</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider">Status</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider">Joined</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider text-right">Finances (Spent/Earned)</th>
+<th class="py-3 px-4 font-ui-label-sm text-ui-label-sm text-text-muted font-semibold uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-divider">
+<!-- Row 1 -->
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="py-4 px-4 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-divider shrink-0" data-alt="A small circular avatar of a professional looking woman with short brown hair, wearing a white blouse, isolated on a light gray background. Corporate and minimal portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz3HTAsjRIvtS1NBctAnAssRzhMJtTLPL1TyDtmyM-b4avy-lq596GuioGDNVn7_MzmqPuEeX6I9C8l1BWU9C4myBsk7anwdkW-y8LHEugOrdnwI1Ge1J9rJBHPg5akXCg7L5aD1w7ri0Rms94I8eTyF8YRn6G4Obx_atqTNFsGWkJb-7gIS4NTCixa2fOxuSF29p6Yl0Kv0QglIVfP-jA-46bSORXWLC_vLmkqo2Ldq1Pf_kT_Q54"/>
+<div class="min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Eleanor Vance</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">eleanor.v@example.com</p>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-surface-variant text-on-surface-variant font-ui-label-sm text-ui-label-sm font-semibold">Author</span>
+</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="py-4 px-4 font-ui-label-md text-ui-label-md text-on-surface-variant">
+                                    Oct 12, 2023
+                                </td>
+<td class="py-4 px-4 text-right">
+<p class="font-ui-label-md text-ui-label-md text-on-surface">$14.00 / <span class="text-primary-container font-semibold">$1,240.50</span></p>
+</td>
+<td class="py-4 px-4 text-right">
+<button aria-label="More actions" class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-ui-label-md text-ui-label-md font-bold shrink-0">
+                                        TH
+                                    </div>
+<div class="min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Thomas Huxley</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">t.huxley@domain.org</p>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-[#F2F2F2] text-on-surface font-ui-label-sm text-ui-label-sm">Reader</span>
+</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="py-4 px-4 font-ui-label-md text-ui-label-md text-on-surface-variant">
+                                    Nov 05, 2023
+                                </td>
+<td class="py-4 px-4 text-right">
+<p class="font-ui-label-md text-ui-label-md text-on-surface">$45.00 / $0.00</p>
+</td>
+<td class="py-4 px-4 text-right">
+<button aria-label="More actions" class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Suspended) -->
+<tr class="hover:bg-background-secondary transition-colors group bg-error-container/10">
+<td class="py-4 px-4 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-divider shrink-0 grayscale opacity-80" data-alt="A small circular avatar of a man with glasses and a beard, wearing a dark sweater, isolated on a light gray background. Moody and slightly darkened portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGlvwPhjhaeCNhHPTEoSce-cLzXRIkvZ0XO8WAqvWH30nCEsm0QuSLjF6Md-vFTTs8t4g-GSbjdPcXUN5xLsqHdr2w0QFLSECQkmzq0YeTKY9KnudSeC9jStXnovx64RQjB3ZXutvzWxC-ZRcK5Prvwb9YxlyK_vm0U3Vhjc-rNGQ-YADopuW-fIwryUq5aKVr1mLNIHklsV-447t38pNTpWKgTyS-6vTlSSUo0wxJz7xDRBmvJuey"/>
+<div class="min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Arthur Pendelton</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">art.pendelton@suspicious.net</p>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-surface-variant text-on-surface-variant font-ui-label-sm text-ui-label-sm font-semibold">Author</span>
+</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-error">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                        Suspended
+                                    </span>
+</td>
+<td class="py-4 px-4 font-ui-label-md text-ui-label-md text-on-surface-variant">
+                                    Aug 22, 2023
+                                </td>
+<td class="py-4 px-4 text-right">
+<p class="font-ui-label-md text-ui-label-md text-on-surface">$0.00 / $42.10</p>
+</td>
+<td class="py-4 px-4 text-right">
+<button aria-label="More actions" class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-ui-label-md text-ui-label-md font-bold shrink-0">
+                                        JS
+                                    </div>
+<div class="min-w-0">
+<p class="font-ui-label-md text-ui-label-md text-on-surface truncate">Jane Smith</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted truncate">jane.s@email.com</p>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-[#F2F2F2] text-on-surface font-ui-label-sm text-ui-label-sm">Reader</span>
+</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="py-4 px-4 font-ui-label-md text-ui-label-md text-on-surface-variant">
+                                    Jan 10, 2024
+                                </td>
+<td class="py-4 px-4 text-right">
+<p class="font-ui-label-md text-ui-label-md text-on-surface">$120.00 / $0.00</p>
+</td>
+<td class="py-4 px-4 text-right">
+<button aria-label="More actions" class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex justify-between items-center w-full py-4 text-on-surface-variant">
+<span class="font-ui-label-sm text-ui-label-sm">Showing 1 to 4 of 248 entries</span>
+<div class="flex gap-2">
+<button class="p-1 border border-divider rounded-DEFAULT hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-1 border border-divider rounded-DEFAULT hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 2: Author Approvals List -->
+<section class="flex flex-col gap-stack-md w-full pt-stack-md border-t border-divider">
+<header class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Author Applications</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">Pending review for publishing privileges.</p>
+</div>
+<span class="bg-tertiary-container text-on-tertiary font-ui-label-sm text-ui-label-sm px-2 py-1 rounded-full">3 Pending</span>
+</header>
+<!-- Bento-ish Grid for Applications -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Applicant Card 1 -->
+<article class="flex flex-col bg-background-primary border border-divider p-6 gap-4 relative group hover:border-outline transition-colors">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-4">
+<img class="w-16 h-16 object-cover border border-divider shrink-0" data-alt="A clear, professional headshot of an older gentleman with white hair and a neat beard, wearing a tweed jacket. Neutral gray studio background, high quality editorial lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD2d1TmVSrvZ-TgxWgdtuYAr3MC91uvlXA2BE7Wl-g8nI8a5Op_1ST75owk0iWBF-r7mPmwSDRTX1uF1eiHtgKOgHj2BowxsjnUKWm5VAGWlGmf-__USxUTS8MMMr_mhWNDDnTPjoTeYqyDChT2VYZnSP6LHqgJRGYiPgJN5x6ciIxMHMa_ZkkRATxWyFvtbthH7k1HemRl-lFOPzdTlrm_UJ20QDEX3dMLvZ8p5Lvl1wiwzOvlR94"/>
+<div>
+<h3 class="font-headline-sm text-[20px] leading-tight text-on-surface mb-1">Marcus Whitfield</h3>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">Applied: 2 hours ago</p>
+</div>
+</div>
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-secondary-container bg-secondary-fixed/20 px-2 py-1 rounded-DEFAULT shrink-0">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+                                Pending Review
+                            </span>
+</div>
+<div class="font-body-md text-[15px] leading-relaxed text-on-surface-variant line-clamp-3">
+                            "I have spent the last two decades writing investigative pieces for local print media. I am looking to transition my long-form essays on urban development and historical architecture to a digital platform that respects the written word."
+                        </div>
+<div class="flex items-center gap-3 mt-2 pt-4 border-t border-divider">
+<div class="flex items-center gap-2 text-text-muted font-ui-label-sm text-ui-label-sm">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+                                ID Verified
+                            </div>
+<div class="flex items-center gap-2 text-text-muted font-ui-label-sm text-ui-label-sm ml-auto">
+<span class="material-symbols-outlined text-[18px]">link</span>
+                                2 Portfolio Links
+                            </div>
+</div>
+<button class="mt-4 w-full py-2 bg-primary-container text-on-primary font-ui-label-md text-ui-label-md rounded-DEFAULT hover:opacity-90 transition-opacity">
+                            Review Application
+                        </button>
+</article>
+<!-- Applicant Card 2 -->
+<article class="flex flex-col bg-background-primary border border-divider p-6 gap-4 relative group hover:border-outline transition-colors">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-4">
+<img class="w-16 h-16 object-cover border border-divider shrink-0" data-alt="A bright, modern headshot of a young woman with curly hair, wearing a vibrant yellow sweater. Outdoor setting with blurred green background. High key lighting, friendly expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9hRdpkwLUfzMW0GwbTrNOT7QnBaxyvhyScQtLPFISUqN6g0CI7H_zZTSVmcOWcX7HcXZI_WkurRwfJmGA1hYMnjv7iQGLRMXE_CCEeLKn6vehx15ebLr4jaTshvRI1R1-dy7T9aCk8-U0szonQj1Tc8qQaqiF3jQazWzWC765OjrnmC5S_Jr48GfExbM8ap0wizq45Fv-8jzJprI0qLezMXIhY3hUEEk9ZGg_G9Gnnn-uJmSedd94"/>
+<div>
+<h3 class="font-headline-sm text-[20px] leading-tight text-on-surface mb-1">Chloe Davis</h3>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">Applied: 1 day ago</p>
+</div>
+</div>
+<span class="flex items-center gap-1 font-ui-label-sm text-ui-label-sm text-secondary-container bg-secondary-fixed/20 px-2 py-1 rounded-DEFAULT shrink-0">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+                                Pending Review
+                            </span>
+</div>
+<div class="font-body-md text-[15px] leading-relaxed text-on-surface-variant line-clamp-3">
+                            "Passionate about modern poetry and short fiction. I've self-published two zines and want to reach a wider audience that appreciates literary experimentation and raw, emotional storytelling."
+                        </div>
+<div class="flex items-center gap-3 mt-2 pt-4 border-t border-divider">
+<div class="flex items-center gap-2 text-error font-ui-label-sm text-ui-label-sm">
+<span class="material-symbols-outlined text-[18px]">error</span>
+                                ID Mismatch
+                            </div>
+<div class="flex items-center gap-2 text-text-muted font-ui-label-sm text-ui-label-sm ml-auto">
+<span class="material-symbols-outlined text-[18px]">link</span>
+                                0 Portfolio Links
+                            </div>
+</div>
+<button class="mt-4 w-full py-2 border border-primary text-primary font-ui-label-md text-ui-label-md rounded-DEFAULT hover:bg-surface-container transition-colors">
+                            Review Application
+                        </button>
+</article>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<!-- Minimal admin footer -->
+<footer class="w-full mt-auto py-6 border-t border-divider px-margin-mobile md:px-gutter max-w-container-max mx-auto text-center md:text-left text-text-muted font-ui-label-sm text-ui-label-sm">
+        © 2024 InkFolio Admin System. Confidential Internal Use Only.
+    </footer>
+</body></html>

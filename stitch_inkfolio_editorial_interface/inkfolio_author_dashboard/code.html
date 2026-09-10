@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Author Dashboard | InkFolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#380d00",
+                    "primary": "#00342b",
+                    "on-tertiary-fixed-variant": "#6d382a",
+                    "primary-fixed-dim": "#94d3c1",
+                    "on-primary-fixed-variant": "#065043",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dcd9d9",
+                    "background-primary": "#FFFFFF",
+                    "secondary-fixed": "#ffdbcf",
+                    "on-primary-container": "#7ebdac",
+                    "on-background": "#1c1b1b",
+                    "primary-container": "#004d40",
+                    "background-secondary": "#FAFAFA",
+                    "surface-tint": "#29695b",
+                    "inverse-on-surface": "#f3f0ef",
+                    "primary-fixed": "#afefdd",
+                    "tertiary-container": "#693527",
+                    "tertiary-fixed": "#ffdbd1",
+                    "on-tertiary": "#ffffff",
+                    "divider": "#E6E6E6",
+                    "on-tertiary-container": "#e89f8c",
+                    "outline": "#707975",
+                    "on-secondary": "#ffffff",
+                    "text-muted": "#6B6B6B",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#4e2013",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#802a00",
+                    "inverse-primary": "#94d3c1",
+                    "secondary-container": "#fc6018",
+                    "on-surface-variant": "#3f4945",
+                    "inverse-surface": "#313030",
+                    "tertiary-fixed-dim": "#ffb5a1",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#a83900",
+                    "surface-variant": "#e5e2e1",
+                    "on-secondary-container": "#531800",
+                    "on-tertiary-fixed": "#370e04",
+                    "secondary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#eae7e7",
+                    "surface-container": "#f0eded",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary-fixed": "#00201a",
+                    "error": "#ba1a1a",
+                    "surface": "#fcf9f8",
+                    "outline-variant": "#bfc9c4",
+                    "background": "#fcf9f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-xl": "80px",
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "reading-width": "720px",
+                    "container-max": "1200px",
+                    "stack-sm": "12px",
+                    "stack-lg": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Merriweather"],
+                    "headline-sm": ["Merriweather"],
+                    "headline-md": ["Merriweather"],
+                    "display-lg-mobile": ["Merriweather"],
+                    "ui-label-lg": ["Inter"],
+                    "body-md": ["Merriweather"],
+                    "ui-label-md": ["Inter"],
+                    "display-lg": ["Merriweather"],
+                    "ui-label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "ui-label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "ui-label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "ui-label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: #f0eded;
+            border-right: 3px solid #00342b;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc9c4;
+            border-radius: 10px;
+        }
+        canvas#earningsChart {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-ui-label-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-background border-b border-divider h-16 flex items-center px-6 md:px-stack-lg max-w-full">
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">InkFolio</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-primary border-b-2 border-primary pb-1 font-ui-label-lg text-ui-label-lg" href="#">Dashboard</a>
+<a class="text-text-muted hover:text-primary transition-colors font-ui-label-lg text-ui-label-lg" href="#">Essays</a>
+<a class="text-text-muted hover:text-primary transition-colors font-ui-label-lg text-ui-label-lg" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-full transition-colors">notifications</button>
+<div class="flex items-center gap-3 pl-4 border-l border-divider">
+<div class="text-right hidden sm:block">
+<p class="font-ui-label-md text-ui-label-md text-on-surface leading-none">Julian Barnes</p>
+<p class="font-ui-label-sm text-ui-label-sm text-text-muted">Pro Author</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-divider">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a middle-aged male author with a kind smile, short grey hair, wearing a dark tweed jacket. The lighting is soft and artistic, reminiscent of high-end literary magazine portraits. The background is a blurred bookshelf, maintaining a clean and intellectual editorial aesthetic consistent with the InkFolio brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzC7YvumUIKqGWqxnzWKeKBRatFErj47Ty7Rx-5Z65PPxAFfs24NYooQ6T4zsgbQgWBWUlbco2JsayhKgrqtrFCl7-VIXlU3ofYkBnAl-TqO-SjpUSBEES0UHyAkrCXwiI8VsbJMerFpBOkoa2xapCqzV2J2tZP70XrvZ2-BO-Mm9cXVjQiFlQvaKnNslFLxcFoeIhRtJFVUnW2O-WzTPUyc6pHIEsHUEJK4-wphiFhBjCkWJdN9Um"/>
+</div>
+<span class="material-symbols-outlined cursor-pointer">expand_more</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- Sidebar -->
+<aside class="hidden md:flex flex-col w-64 border-r border-divider bg-background-secondary pt-8 sticky top-16 h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar">
+<nav class="flex flex-col gap-1">
+<a class="sidebar-active flex items-center gap-4 px-8 py-3 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-ui-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-text-muted hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-ui-label-lg">My Blogs</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-text-muted hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">edit_square</span>
+<span class="font-ui-label-lg">Write New</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-text-muted hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-ui-label-lg">Earnings</span>
+</a>
+<div class="my-6 mx-8 border-t border-divider"></div>
+<a class="flex items-center gap-4 px-8 py-3 text-text-muted hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-ui-label-lg">Profile</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-text-muted hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-ui-label-lg">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-8">
+<div class="bg-primary-container p-4 rounded-xl text-on-primary">
+<p class="font-ui-label-sm uppercase tracking-wider mb-2">InkFolio Plus</p>
+<p class="text-ui-label-md mb-4 opacity-90">Unlock advanced analytics and priority support.</p>
+<button class="w-full bg-primary-fixed text-on-primary-fixed py-2 rounded font-ui-label-md hover:opacity-90 transition-opacity">Upgrade Now</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 px-6 md:px-stack-lg py-8 bg-background">
+<div class="max-w-container-max mx-auto">
+<div class="mb-stack-md flex justify-between items-end">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Welcome back, Julian.</h1>
+<p class="text-text-muted font-body-md">Your narrative journey continues. Here is how your stories are resonating today.</p>
+</div>
+<button class="bg-primary-container text-on-primary px-6 py-3 rounded-lg flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined">add</span>
+<span class="font-ui-label-lg">Write New Blog</span>
+</button>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-stack-lg">
+<div class="bg-white border border-divider p-6 rounded-lg group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">library_books</span>
+<span class="text-xs font-ui-label-sm text-on-primary-container bg-primary-fixed px-2 py-1 rounded">+2 this week</span>
+</div>
+<p class="text-text-muted font-ui-label-md">Total Published Blogs</p>
+<p class="font-headline-sm text-headline-sm mt-1">12</p>
+</div>
+<div class="bg-white border border-divider p-6 rounded-lg group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">visibility</span>
+<span class="text-xs font-ui-label-sm text-on-primary-container bg-primary-fixed px-2 py-1 rounded">12% growth</span>
+</div>
+<p class="text-text-muted font-ui-label-md">Total Views</p>
+<p class="font-headline-sm text-headline-sm mt-1">45.2k</p>
+</div>
+<div class="bg-white border border-divider p-6 rounded-lg group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">payments</span>
+<span class="text-xs font-ui-label-sm text-on-secondary-container bg-secondary-fixed px-2 py-1 rounded">Paid Out</span>
+</div>
+<p class="text-text-muted font-ui-label-md">Total Earnings</p>
+<p class="font-headline-sm text-headline-sm mt-1">$1,240</p>
+</div>
+<div class="bg-white border border-divider p-6 rounded-lg group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">pending_actions</span>
+<span class="text-xs font-ui-label-sm text-on-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">Reviewing</span>
+</div>
+<p class="text-text-muted font-ui-label-md">Pending Approval</p>
+<p class="font-headline-sm text-headline-sm mt-1">2</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-stack-lg">
+<!-- Table Section -->
+<div class="lg:col-span-2 bg-white border border-divider rounded-lg overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-divider flex justify-between items-center bg-background-secondary">
+<h2 class="font-headline-sm text-headline-sm !text-[20px]">My Blogs</h2>
+<a class="text-primary font-ui-label-md underline underline-offset-4 hover:opacity-70" href="#">View Archive</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-on-surface-variant font-ui-label-sm uppercase tracking-wider text-[11px]">
+<tr>
+<th class="px-6 py-4">Article</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Stats</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-divider font-ui-label-md">
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist, high-contrast abstract architectural photo of a spiral staircase looking up towards a skylight. The colors are strictly monochromatic with sharp lines and soft shadows, evoking a sense of structure and deep thought, ideal for a literary essay thumbnail in a premium editorial dashboard like InkFolio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkKbB9mAxBhzvcvRCgU-t-2OppKAvdNMWAcy9I5ywRitJckf2y-5GD-je6bCEUka7wAXQv-cGHNeIoiJVYFNuW5SVbbQ4xHNbMnF2oE6jT-SLnjTNuGVqHDrVtcZPN5Z1KMfL_o1DTpMJY_-DTiwyDTIr6F6XG336XV6gLTUBNlSjwkDDuid4ak9Meo8l8zlAdi7Lwy_Ps2zilg3mlQdFlQzVCB3ViDSED8EzFL8C0VaGurTUtYC8n"/>
+</div>
+<div class="max-w-[200px]">
+<p class="font-headline-sm !text-[16px] truncate text-on-surface">The Architecture of Silence</p>
+<p class="text-text-muted text-[12px] truncate">Essays / Philosophy</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Published</span>
+</td>
+<td class="px-6 py-4 text-text-muted">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> 12.4k</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">favorite</span> 842</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-muted text-sm">Oct 12, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary p-1">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up photograph of old parchment paper with elegant, faded fountain pen ink calligraphy. The lighting is warm and cinematic, casting long, soft shadows across the texture of the paper. This image represents the craft of writing and classical literature within the InkFolio design system's aesthetic of timeless intellectual curiosity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS9W6Nd1G4v7_zzGjIseCcJfQAxUAer8Vpb2thY9o9buc-aOO3MNj3IS3k0UeIN97GLivT7sZNItd9gzSy2kR1roXyfatFGo1V337l2fVu3WKe4j7y-X3d6Qh44bqryQVBj7O4ArUBQnokiBfZnpkCO2F47s6uhHSczff1blXjZcqovLwm3ReWSI3ys43rv4mLuqA4up6G55sSFAqfTccfTGH83WmK2TertkAZ59GxGUp5I5XdQtJc"/>
+</div>
+<div class="max-w-[200px]">
+<p class="font-headline-sm !text-[16px] truncate text-on-surface">Ink and Afterthought</p>
+<p class="text-text-muted text-[12px] truncate">Journalism / Craft</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Pending</span>
+</td>
+<td class="px-6 py-4 text-text-muted">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> --</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">favorite</span> --</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-muted text-sm">Oct 24, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary p-1">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-background-secondary transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A moody, atmospheric shot of an open typewriter sitting on a wooden desk near a rain-streaked window. The color palette is cool with deep blues and greys, punctuated by the warm glow of a desk lamp. This editorial-style photograph evokes the spirit of 20th-century investigative journalism, fitting for a 'Draft' status article in a high-end publishing platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCONmxdSrBdH96P5_IAaupG-bmy5nAMVGtNlnBsr5U4R9L4a9pteBPqYthKaqKXdYMJGrwgvo91UN-xCIOXgfTGA96jbIlCQk9D1mSMXnmHFeZn1mOU9ZaEZJaakrFVQyGNUSpENJUVQqegggebOdMfkSqGcpO_UhD9gWB2n5WbaidPZwi5vxPtRZPuI8UopyVxii_aYql3PsOQ3i2X5DKLwnE1yXYhxSrFKD6U_1SGtAcQE9wk1b2r"/>
+</div>
+<div class="max-w-[200px]">
+<p class="font-headline-sm !text-[16px] truncate text-on-surface">The Last Typist</p>
+<p class="text-text-muted text-[12px] truncate">Fiction / Noir</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Draft</span>
+</td>
+<td class="px-6 py-4 text-text-muted">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> --</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">favorite</span> --</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-muted text-sm">Drafted 2h ago</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary p-1">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-divider bg-background-secondary flex justify-center">
+<button class="text-primary font-ui-label-md flex items-center gap-2 hover:gap-3 transition-all">
+                                Load more content <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Earnings Chart Widget -->
+<div class="flex flex-col gap-6">
+<div class="bg-white border border-divider rounded-lg p-6 flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-sm text-headline-sm !text-[20px]">Earnings</h2>
+<select class="bg-transparent border-none font-ui-label-sm text-text-muted focus:ring-0 cursor-pointer">
+<option>Last 30 Days</option>
+<option>Last 6 Months</option>
+<option>Year to Date</option>
+</select>
+</div>
+<div class="flex-1 flex items-end justify-between gap-2 h-40 mb-6">
+<!-- Minimal CSS Chart Replacement for visualization -->
+<div class="w-full h-full flex items-end gap-1 px-2">
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 30%"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 45%"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 40%"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 60%"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 55%"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-sm transition-all hover:bg-primary-container" style="height: 80%"></div>
+<div class="flex-1 bg-primary-container rounded-t-sm" style="height: 95%"></div>
+</div>
+</div>
+<div class="border-t border-divider pt-4 flex justify-between items-center">
+<div>
+<p class="text-text-muted text-xs uppercase tracking-widest font-ui-label-sm">Balance</p>
+<p class="font-headline-sm text-headline-sm">$480.50</p>
+</div>
+<button class="bg-secondary text-white px-4 py-2 rounded font-ui-label-md hover:opacity-90 transition-opacity">Withdraw</button>
+</div>
+</div>
+<!-- Top Reader Section -->
+<div class="bg-white border border-divider rounded-lg p-6">
+<h2 class="font-headline-sm text-headline-sm !text-[18px] mb-4">Reader Engagement</h2>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-xs">AM</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Alice Merton</p>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+<span class="text-xs text-text-muted">Top Supporter</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-xs">RK</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Robert Kane</p>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full w-[60%]"></div>
+</div>
+</div>
+<span class="text-xs text-text-muted">Commenter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-stack-xl border-t border-divider bg-background-secondary mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile max-w-reading-width mx-auto gap-stack-md">
+<span class="font-headline-sm text-headline-sm text-primary">InkFolio</span>
+<div class="flex gap-8">
+<a class="text-text-muted hover:text-primary transition-colors underline underline-offset-4" href="#">Privacy</a>
+<a class="text-text-muted hover:text-primary transition-colors underline underline-offset-4" href="#">Terms</a>
+<a class="text-text-muted hover:text-primary transition-colors underline underline-offset-4" href="#">RSS</a>
+<a class="text-text-muted hover:text-primary transition-colors underline underline-offset-4" href="#">Contact</a>
+</div>
+<p class="text-text-muted font-body-md text-sm">© 2024 InkFolio. Built for clarity.</p>
+</div>
+</footer>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(!link.classList.contains('sidebar-active')) {
+                    // This is just a UI shim for the demo
+                    // In a real app, this would route
+                }
+            });
+        });
+
+        // Hover effects for the summary cards
+        const cards = document.querySelectorAll('.group');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

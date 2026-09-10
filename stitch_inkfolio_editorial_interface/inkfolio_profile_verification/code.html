@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InkFolio | Author Profile &amp; Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#380d00",
+                    "primary": "#00342b",
+                    "on-tertiary-fixed-variant": "#6d382a",
+                    "primary-fixed-dim": "#94d3c1",
+                    "on-primary-fixed-variant": "#065043",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dcd9d9",
+                    "background-primary": "#FFFFFF",
+                    "secondary-fixed": "#ffdbcf",
+                    "on-primary-container": "#7ebdac",
+                    "on-background": "#1c1b1b",
+                    "primary-container": "#004d40",
+                    "background-secondary": "#FAFAFA",
+                    "surface-tint": "#29695b",
+                    "inverse-on-surface": "#f3f0ef",
+                    "primary-fixed": "#afefdd",
+                    "tertiary-container": "#693527",
+                    "tertiary-fixed": "#ffdbd1",
+                    "on-tertiary": "#ffffff",
+                    "divider": "#E6E6E6",
+                    "on-tertiary-container": "#e89f8c",
+                    "outline": "#707975",
+                    "on-secondary": "#ffffff",
+                    "text-muted": "#6B6B6B",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#4e2013",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#802a00",
+                    "inverse-primary": "#94d3c1",
+                    "secondary-container": "#fc6018",
+                    "on-surface-variant": "#3f4945",
+                    "inverse-surface": "#313030",
+                    "tertiary-fixed-dim": "#ffb5a1",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#a83900",
+                    "surface-variant": "#e5e2e1",
+                    "on-secondary-container": "#531800",
+                    "on-tertiary-fixed": "#370e04",
+                    "secondary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#eae7e7",
+                    "surface-container": "#f0eded",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary-fixed": "#00201a",
+                    "error": "#ba1a1a",
+                    "surface": "#fcf9f8",
+                    "outline-variant": "#bfc9c4",
+                    "background": "#fcf9f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-xl": "80px",
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "reading-width": "720px",
+                    "container-max": "1200px",
+                    "stack-sm": "12px",
+                    "stack-lg": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Merriweather"],
+                    "headline-sm": ["Merriweather"],
+                    "headline-md": ["Merriweather"],
+                    "display-lg-mobile": ["Merriweather"],
+                    "ui-label-lg": ["Inter"],
+                    "body-md": ["Merriweather"],
+                    "ui-label-md": ["Inter"],
+                    "display-lg": ["Merriweather"],
+                    "ui-label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "ui-label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "ui-label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "ui-label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-bottom-width: 2px !important;
+            border-color: #00342b !important;
+        }
+        .form-input-minimal {
+            border: none;
+            border-bottom: 1px solid #E6E6E6;
+            background: transparent;
+            width: 100%;
+            padding: 8px 0;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased">
+<!-- TopNavBar -->
+<nav class="bg-background dark:bg-background border-b border-divider dark:border-outline-variant sticky top-0 w-full z-50">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-stack-lg max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<a class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tight" href="#">InkFolio</a>
+<div class="hidden md:flex gap-6">
+<a class="font-ui-label-lg text-ui-label-lg text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors" href="#">Essays</a>
+<a class="font-ui-label-lg text-ui-label-lg text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors" href="#">Archive</a>
+<a class="font-ui-label-lg text-ui-label-lg text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 font-ui-label-lg text-ui-label-lg rounded-full hover:opacity-90 transition-opacity">
+                    Save Changes
+                </button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-stack-lg py-stack-lg">
+<header class="mb-stack-lg border-b border-divider pb-stack-sm flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary">Author Settings</h1>
+<p class="text-text-muted font-ui-label-lg mt-2">Manage your editorial profile and verification status.</p>
+</div>
+<div class="md:hidden">
+<button class="w-full bg-primary text-on-primary px-6 py-3 font-ui-label-lg text-ui-label-lg rounded-full">Save Changes</button>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Profile Settings -->
+<section class="lg:col-span-7 space-y-12">
+<!-- Profile Header -->
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden border border-divider bg-surface-container-low flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A sophisticated black and white portrait of a person in a minimalist studio setting, emphasizing clean lines and editorial lighting. The person is looking directly at the camera with a calm, professional expression. The background is a soft, off-white texture that matches the InkFolio brand's premium, quiet luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTjCv7DsLHHdGRJ0bbHYEBmn_Od6RnzZWpQJNttzjyNm-y0kO3UeV6n2b9hA7B3TbqhPXzfZcZuYH6d6T0Mn663uIkhwee-CsS-g2ScUy_TL6uMCMXzTmP9hFAfHel3UFS59j5SpihDQZL2AnntfP2p5gIjR5gdgN2qlZ2rQoEJRrZkA4OoqAe34zzwHX6hfWtaXJimAXecfK6nJfmUY7SfVe_O6-MAcYcSWIFbDz3qoO3-EHkTdFN"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-sm hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+</div>
+<div class="flex-1 w-full space-y-6">
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm uppercase tracking-widest text-text-muted">Display Name</label>
+<input class="form-input-minimal font-headline-sm text-headline-sm text-primary" type="text" value="Julian Thorne"/>
+</div>
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm uppercase tracking-widest text-text-muted">Personal Bio</label>
+<textarea class="form-input-minimal font-body-md text-body-md resize-none" placeholder="Write a short biography for your profile page..." rows="4">Julian Thorne is an independent essayist and critic focusing on the intersection of architecture and human psychology. Based in London, his work explores how physical environments shape our internal landscapes.</textarea>
+</div>
+</div>
+</div>
+<!-- Expertise Tags -->
+<div class="space-y-4">
+<h3 class="font-ui-label-lg text-ui-label-lg text-primary">Areas of Expertise</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full font-ui-label-sm text-ui-label-sm text-primary flex items-center gap-2">Architecture <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full font-ui-label-sm text-ui-label-sm text-primary flex items-center gap-2">Psychology <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full font-ui-label-sm text-ui-label-sm text-primary flex items-center gap-2">Minimalism <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<button class="px-4 py-1.5 border border-divider border-dashed rounded-full font-ui-label-sm text-ui-label-sm text-text-muted hover:border-primary hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Tag
+                        </button>
+</div>
+</div>
+<!-- Social Links -->
+<div class="space-y-6 pt-6 border-t border-divider">
+<h3 class="font-ui-label-lg text-ui-label-lg text-primary">Connected Links</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm uppercase tracking-widest text-text-muted flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">language</span> Website
+                            </label>
+<input class="form-input-minimal font-ui-label-md" type="url" value="https://julianthorne.com"/>
+</div>
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm uppercase tracking-widest text-text-muted flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">alternate_email</span> Twitter / X
+                            </label>
+<input class="form-input-minimal font-ui-label-md" type="text" value="@jthorne_writer"/>
+</div>
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm uppercase tracking-widest text-text-muted flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">link</span> LinkedIn
+                            </label>
+<input class="form-input-minimal font-ui-label-md" placeholder="linkedin.com/in/username" type="url"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: System Cards -->
+<aside class="lg:col-span-5 space-y-8">
+<!-- Payout Details -->
+<div class="p-8 bg-surface-container-lowest border border-divider rounded-lg">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Payout Details</h2>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-ui-label-sm text-ui-label-sm text-text-muted">Payment Method</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-3 font-ui-label-md">
+<option>Direct Bank Transfer (ACH)</option>
+<option>Stripe Connect</option>
+<option>PayPal</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm text-text-muted">Account Holder Name</label>
+<input class="form-input-minimal font-ui-label-md" type="text" value="Julian S. Thorne"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm text-text-muted">Routing Number</label>
+<input class="form-input-minimal font-ui-label-md" placeholder="000000000" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-ui-label-sm text-ui-label-sm text-text-muted">Account Number</label>
+<input class="form-input-minimal font-ui-label-md" type="password" value="********4590"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Identity Verification -->
+<div class="p-8 bg-surface-container-lowest border border-divider rounded-lg">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Verification</h2>
+</div>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed font-ui-label-sm text-[11px] rounded uppercase tracking-widest">Pending</span>
+</div>
+<p class="text-text-muted font-body-md mb-6 text-sm">To enable monetized essays, please upload a valid government-issued ID.</p>
+<div class="space-y-4">
+<select class="w-full bg-surface-container-low border-none rounded-lg p-3 font-ui-label-md">
+<option>Passport</option>
+<option>Driver's License</option>
+<option>National ID Card</option>
+</select>
+<div class="border-2 border-dashed border-divider rounded-xl p-8 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-text-muted group-hover:text-primary transition-colors">cloud_upload</span>
+<span class="font-ui-label-md text-text-muted">Drag &amp; Drop or Click to Upload</span>
+<span class="font-ui-label-sm text-text-muted text-[11px]">PDF, PNG, JPG up to 10MB</span>
+</div>
+</div>
+</div>
+<!-- Subscription Plan -->
+<div class="p-8 bg-primary text-on-primary rounded-lg shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="font-headline-sm text-headline-sm mb-1">Author Pro</h2>
+<p class="font-ui-label-md opacity-80 mb-6">Your current active subscription</p>
+<div class="flex items-baseline gap-2 mb-8">
+<span class="font-display-lg text-4xl">$12</span>
+<span class="font-ui-label-lg opacity-60">/ month</span>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full bg-white text-primary py-3 rounded-full font-ui-label-lg hover:bg-opacity-90 transition-all">
+                                Upgrade to Collective
+                            </button>
+<a class="text-center font-ui-label-sm opacity-80 underline underline-offset-4 hover:opacity-100" href="#">View Billing History</a>
+</div>
+</div>
+<!-- Subtle abstract shape for depth -->
+<div class="absolute -right-8 -bottom-8 w-48 h-48 bg-primary-container rounded-full opacity-50 blur-3xl"></div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-background-secondary dark:bg-surface-container-low w-full py-stack-xl border-t border-divider dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile max-w-reading-width mx-auto gap-stack-md">
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim">InkFolio</span>
+<div class="flex gap-6">
+<a class="text-text-muted font-body-md text-body-md hover:text-primary underline underline-offset-4" href="#">Privacy</a>
+<a class="text-text-muted font-body-md text-body-md hover:text-primary underline underline-offset-4" href="#">Terms</a>
+<a class="text-text-muted font-body-md text-body-md hover:text-primary underline underline-offset-4" href="#">RSS</a>
+<a class="text-text-muted font-body-md text-body-md hover:text-primary underline underline-offset-4" href="#">Contact</a>
+</div>
+<p class="text-text-muted font-body-md text-body-md">© 2024 InkFolio. Built for clarity.</p>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for input fields
+        const inputs = document.querySelectorAll('.form-input-minimal');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.replace('text-text-muted', 'text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.replace('text-primary', 'text-text-muted');
+            });
+        });
+    </script>
+</body></html>
