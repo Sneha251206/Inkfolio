@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #fcf9f8;
+    color: #1c1b1b;
+  }
+}
+
+.editorial-divider {
+  height: 1px;
+  background-color: #E6E6E6;
+  margin: 1.5rem 0;
+}
