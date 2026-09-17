@@ -164,7 +164,7 @@ export default function LandingPage() {
           <div className="bg-primary text-white p-6 rounded-xl space-y-3">
             <h3 className="font-serif font-bold text-xl">Write for InkFolio?</h3>
             <p className="text-sm opacity-90">Join our community of thoughtful authors and get paid for your perspective.</p>
-            <Link to="/editor" className="block text-center w-full py-2.5 bg-white text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all text-sm">
+            <Link to="/verification" className="block text-center w-full py-2.5 bg-white text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all text-sm">
               Apply to Write
             </Link>
           </div>
