@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useAuth, DEMO_ACCOUNTS } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function AuthPage() {
-  const { login, signup, loginAsAuthor, loginAsReader } = useAuth();
+  const { login, signup } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +38,8 @@ export default function AuthPage() {
       return;
     }
 
-    if (cleanPassword.length < 6) {
+    // Only enforce minimum password length on registration
+    if (isSignup && cleanPassword.length < 6) {
       setError('Password must be at least 6 characters long.');
       return;
     }
@@ -64,28 +65,9 @@ export default function AuthPage() {
 
       navigate(redirectPath);
     } catch (err) {
-      setError(err.message || 'Authentication failed. Please verify your credentials.');
+      setError(err.message || 'Invalid email or password.');
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleDemoAuthor = () => {
-    loginAsAuthor();
-    navigate(redirectPath);
-  };
-
-  const handleDemoReader = () => {
-    loginAsReader();
-    navigate(redirectPath);
-  };
-
-  const autofillCredentials = (accountType) => {
-    const creds = DEMO_ACCOUNTS[accountType];
-    if (creds) {
-      setEmail(creds.email);
-      setPassword(creds.password);
-      setError('');
     }
   };
 
@@ -103,68 +85,8 @@ export default function AuthPage() {
           <p className="font-sans text-xs text-text-muted">
             {isSignup 
               ? 'Join our community of thoughtful readers and independent authors' 
-              : 'Enter your verified credentials to continue reading and writing'}
+              : 'Enter your credentials to continue reading and writing'}
           </p>
-        </div>
-
-        {/* Quick Demo Switcher Buttons */}
-        <div className="p-3.5 bg-surface-container rounded-xl border border-divider/60 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] uppercase tracking-wider font-semibold text-text-muted">
-              Instant Demo Access
-            </span>
-            <span className="text-[10px] bg-primary/10 text-primary font-medium px-2 py-0.5 rounded-full">
-              One-click testing
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={handleDemoAuthor}
-              className="px-3 py-2 text-xs font-semibold rounded-lg bg-primary text-white hover:bg-primary-container transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98]"
-            >
-              <span className="material-symbols-outlined text-sm">edit</span>
-              As Author (Elena)
-            </button>
-            <button
-              type="button"
-              onClick={handleDemoReader}
-              className="px-3 py-2 text-xs font-semibold rounded-lg bg-surface border border-divider text-on-surface hover:border-primary transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98]"
-            >
-              <span className="material-symbols-outlined text-sm">menu_book</span>
-              As Reader (Clara)
-            </button>
-          </div>
-
-          {!isSignup && (
-            <div className="pt-1 text-[11px] text-text-muted flex items-center justify-between border-t border-divider/40">
-              <span>Demo logins:</span>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => autofillCredentials('author')}
-                  className="text-primary hover:underline font-medium"
-                >
-                  Fill Author
-                </button>
-                <span>•</span>
-                <button
-                  type="button"
-                  onClick={() => autofillCredentials('reader')}
-                  className="text-primary hover:underline font-medium"
-                >
-                  Fill Reader
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="relative flex py-1 items-center">
-          <div className="flex-grow border-t border-divider"></div>
-          <span className="flex-shrink mx-3 text-xs uppercase tracking-widest text-text-muted font-medium">Or enter credentials</span>
-          <div className="flex-grow border-t border-divider"></div>
         </div>
 
         {/* Tab Toggle */}
@@ -192,16 +114,9 @@ export default function AuthPage() {
         </div>
 
         {error && (
-          <div className="p-3.5 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+          <div className="p-3.5 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
             <span className="material-symbols-outlined text-base flex-shrink-0 text-red-600">error</span>
-            <div className="space-y-1">
-              <p>{error}</p>
-              {!isSignup && error.includes('Invalid') && (
-                <p className="text-[11px] text-red-600 font-normal">
-                  Demo hint: Author pass is <code className="bg-red-100 px-1 py-0.5 rounded font-mono font-bold">elena123</code>, Reader pass is <code className="bg-red-100 px-1 py-0.5 rounded font-mono font-bold">clara123</code>.
-                </p>
-              )}
-            </div>
+            <p>{error}</p>
           </div>
         )}
 
@@ -242,7 +157,9 @@ export default function AuthPage() {
               <label className="block text-xs font-semibold text-text-muted uppercase">
                 Password
               </label>
-              <span className="text-[11px] text-text-muted">Min 6 characters</span>
+              {isSignup && (
+                <span className="text-[11px] text-text-muted">Min 6 characters</span>
+              )}
             </div>
             <div className="relative">
               <input

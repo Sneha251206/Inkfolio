@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, isLoggedIn, isAuthor, logout, loginAsAuthor, loginAsReader } = useAuth();
+  const { user, isLoggedIn, isAuthor, logout } = useAuth();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -184,32 +184,6 @@ export default function Navbar() {
                       )}
                     </div>
 
-                    {/* Interactive Role Switcher for seamless testing */}
-                    <div className="border-t border-divider px-4 py-2 bg-surface-container-low/60">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1.5">
-                        Demo View Switcher
-                      </p>
-                      <div className="flex gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => { loginAsAuthor(); setDropdownOpen(false); }}
-                          className={`flex-1 py-1 text-[11px] font-medium rounded transition-all ${
-                            isAuthor ? 'bg-primary text-white' : 'bg-surface border border-divider text-on-surface hover:bg-surface-container'
-                          }`}
-                        >
-                          Author
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => { loginAsReader(); setDropdownOpen(false); }}
-                          className={`flex-1 py-1 text-[11px] font-medium rounded transition-all ${
-                            !isAuthor ? 'bg-primary text-white' : 'bg-surface border border-divider text-on-surface hover:bg-surface-container'
-                          }`}
-                        >
-                          Reader
-                        </button>
-                      </div>
-                    </div>
 
                     {/* Sign Out */}
                     <div className="border-t border-divider pt-1">

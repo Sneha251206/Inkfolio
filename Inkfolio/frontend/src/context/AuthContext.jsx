@@ -157,12 +157,8 @@ export function AuthProvider({ children }) {
     const store = getLocalAuthStore();
     const match = store.find(entry => entry.email.toLowerCase() === cleanEmail);
 
-    if (!match) {
-      throw new Error('Account not found. For demo access, use elena@inkfolio.org (pass: elena123) or sign up.');
-    }
-
-    if (match.password !== cleanPassword) {
-      throw new Error('Invalid password. Random passwords are not accepted. For demo accounts, use password: ' + (cleanEmail.includes('clara') ? 'clara123' : 'elena123'));
+    if (!match || match.password !== cleanPassword) {
+      throw new Error('Invalid email or password.');
     }
 
     // Password matches!
