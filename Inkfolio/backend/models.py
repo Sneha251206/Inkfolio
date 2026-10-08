@@ -21,6 +21,24 @@ class Article(Base):
     views = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.utcnow)
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False)
+    username = Column(String(100), unique=True, index=True)
+    email = Column(String(255), unique=True, index=True)
+    hashed_password = Column(String(255), nullable=False)
+    role = Column(String(50), default="author")
+    bio = Column(Text, nullable=True)
+    avatar = Column(String(500), nullable=True)
+    is_author = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=True)
+    followers_count = Column(Integer, default=0)
+    following_count = Column(Integer, default=0)
+    articles_count = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
 class UserProfile(Base):
     __tablename__ = "user_profiles"
 

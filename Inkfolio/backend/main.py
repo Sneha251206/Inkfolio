@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
 from database import engine, Base
-from routers import articles, users, analytics, moderation
+from routers import articles, users, analytics, moderation, auth
 
 # Initialize Database tables
 Base.metadata.create_all(bind=engine)
@@ -14,16 +14,28 @@ app = FastAPI(
     debug=settings.DEBUG
 )
 
-# CORS Configuration
+# CORS Configuration: explicitly allow origins and regex pattern for Cloudflare Workers & preview deployments
+allowed_origins = list(set(settings.cors_origins_list + [
+    "https://inkfolio.sneha251206.workers.dev",
+    "https://inkfolio.onrender.com",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://localhost:4173",
+]))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=allowed_origins,
+    allow_origin_regex=r"^https://.*(\.workers\.dev|\.pages\.dev|\.onrender\.com)$|^http://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Register Routers
+app.include_router(auth.router, prefix="/api")
 app.include_router(articles.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
 app.include_router(analytics.router, prefix="/api")
@@ -39,8 +51,13 @@ def read_root():
     }
 
 @app.get("/api/health")
+@app.get("/api/health/")
 def health_check():
     return {"status": "healthy"}
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return Response(status_code=204)
 
 if __name__ == "__main__":
     import uvicorn

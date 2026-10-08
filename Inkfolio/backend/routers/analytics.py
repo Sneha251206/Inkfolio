@@ -6,6 +6,7 @@ import models, schemas
 router = APIRouter(prefix="/analytics", tags=["Analytics"])
 
 @router.get("/overview", response_model=schemas.AnalyticsOverview)
+@router.get("/overview/", response_model=schemas.AnalyticsOverview)
 def get_analytics_overview(db: Session = Depends(get_db)):
     total_articles = db.query(models.Article).count()
     total_views = sum([a.views for a in db.query(models.Article).all()]) or 45800

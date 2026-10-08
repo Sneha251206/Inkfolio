@@ -45,6 +45,35 @@ class UserProfileResponse(UserProfileBase):
     class Config:
         from_attributes = True
 
+class UserRegister(BaseModel):
+    name: str
+    email: str
+    password: str
+    role: Optional[str] = "author"
+    is_author: Optional[bool] = True
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+class UserAuthResponse(BaseModel):
+    id: int
+    name: str
+    username: str
+    email: str
+    role: str
+    bio: Optional[str] = None
+    avatar: Optional[str] = None
+    is_author: bool = True
+    is_verified: bool = True
+    followers_count: int = 0
+    following_count: int = 0
+    articles_count: int = 0
+    token: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
 class AnalyticsOverview(BaseModel):
     total_articles: int
     total_views: int

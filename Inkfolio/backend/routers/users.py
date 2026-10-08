@@ -35,12 +35,14 @@ def seed_mock_users_if_empty(db: Session):
         db.add_all(sample_users)
         db.commit()
 
+@router.get("", response_model=List[schemas.UserProfileResponse])
 @router.get("/", response_model=List[schemas.UserProfileResponse])
 def get_users(db: Session = Depends(get_db)):
     seed_mock_users_if_empty(db)
     return db.query(models.UserProfile).all()
 
 @router.get("/me", response_model=schemas.UserProfileResponse)
+@router.get("/me/", response_model=schemas.UserProfileResponse)
 def get_current_user_profile(db: Session = Depends(get_db)):
     seed_mock_users_if_empty(db)
     user = db.query(models.UserProfile).first()

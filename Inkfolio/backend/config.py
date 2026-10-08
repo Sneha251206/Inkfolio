@@ -8,11 +8,19 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     SECRET_KEY: str = "inkfolio_secret_key_default"
     DATABASE_URL: str = "sqlite:///./inkfolio.db"
-    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    CORS_ORIGINS: str = (
+        "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,"
+        "http://localhost:4173,https://inkfolio.sneha251206.workers.dev,"
+        "https://inkfolio.onrender.com"
+    )
 
     @property
     def cors_origins_list(self) -> List[str]:
-        return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
+        origins = [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
+        # Ensure production worker domain is always included
+        if "https://inkfolio.sneha251206.workers.dev" not in origins:
+            origins.append("https://inkfolio.sneha251206.workers.dev")
+        return origins
 
     class Config:
         env_file = ".env"

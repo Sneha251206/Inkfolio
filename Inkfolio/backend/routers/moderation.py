@@ -6,6 +6,7 @@ from database import get_db
 router = APIRouter(prefix="/moderation", tags=["Moderation"])
 
 @router.get("/queue")
+@router.get("/queue/")
 def get_moderation_queue(db: Session = Depends(get_db)):
     return [
         {"id": 1, "article_title": "Understanding Quantum Computing Paradigms", "author_name": "Marcus Vance", "reason": "Copyright Flag", "status": "Pending", "submitted_at": "2026-09-08T10:00:00"},
@@ -13,6 +14,7 @@ def get_moderation_queue(db: Session = Depends(get_db)):
     ]
 
 @router.get("/payouts")
+@router.get("/payouts/")
 def get_payouts_summary(db: Session = Depends(get_db)):
     return {
         "pending_payouts": 14250.00,

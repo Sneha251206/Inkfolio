@@ -59,6 +59,7 @@ def seed_mock_articles_if_empty(db: Session):
         db.add_all(sample_articles)
         db.commit()
 
+@router.get("", response_model=List[schemas.ArticleResponse])
 @router.get("/", response_model=List[schemas.ArticleResponse])
 def get_articles(db: Session = Depends(get_db)):
     seed_mock_articles_if_empty(db)
@@ -75,6 +76,7 @@ def get_article(article_id: int, db: Session = Depends(get_db)):
     db.refresh(article)
     return article
 
+@router.post("", response_model=schemas.ArticleResponse, status_code=status.HTTP_201_CREATED)
 @router.post("/", response_model=schemas.ArticleResponse, status_code=status.HTTP_201_CREATED)
 def create_article(article: schemas.ArticleCreate, db: Session = Depends(get_db)):
     db_article = models.Article(**article.dict())
