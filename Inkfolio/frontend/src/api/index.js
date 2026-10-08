@@ -76,6 +76,16 @@ export const fetchCurrentUser = async () => {
   return response.data;
 };
 
+export const forgotPasswordApi = async (email) => {
+  const response = await api.post('/auth/forgot-password', { email });
+  return response.data;
+};
+
+export const resetPasswordApi = async ({ token, new_password }) => {
+  const response = await api.post('/auth/reset-password', { token, new_password });
+  return response.data;
+};
+
 // Editorial Content API methods
 export const fetchArticles = async () => {
   try {

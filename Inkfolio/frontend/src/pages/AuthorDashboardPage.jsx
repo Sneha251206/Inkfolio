@@ -4,10 +4,10 @@ import { fetchAnalyticsOverview } from '../api';
 
 export default function AuthorDashboardPage() {
   const [stats, setStats] = useState({
-    total_views: 45800,
-    total_likes: 4460,
-    monthly_earnings: 3450.75,
-    active_subscribers: 12840
+    total_views: 0,
+    total_likes: 0,
+    monthly_earnings: 0,
+    active_subscribers: 0
   });
 
   const [activeTab, setActiveTab] = useState('published'); // 'published' or 'drafts'
@@ -26,60 +26,8 @@ export default function AuthorDashboardPage() {
     setTimeout(() => setExportNotice(false), 3000);
   };
 
-  const publishedStories = [
-    {
-      id: 1,
-      title: "The Architecture of Deep Focus in the Digital Noise Age",
-      category: "Deep Dive",
-      publishedDate: "Sep 01, 2026",
-      views: "12,400",
-      likes: "1,420",
-      comments: 28,
-      earnings: "$1,240.00",
-      status: "Published"
-    },
-    {
-      id: 2,
-      title: "Brutalist Design & The Return of Pure Typography",
-      category: "Design Culture",
-      publishedDate: "Aug 25, 2026",
-      views: "6,700",
-      likes: "890",
-      comments: 14,
-      earnings: "$670.50",
-      status: "Published"
-    },
-    {
-      id: 5,
-      title: "The Silent Cognitive Tax of Hyper-Connectivity",
-      category: "Deep Dive",
-      publishedDate: "Aug 10, 2026",
-      views: "8,920",
-      likes: "1,104",
-      comments: 21,
-      earnings: "$892.00",
-      status: "Published"
-    }
-  ];
-
-  const drafts = [
-    {
-      id: 101,
-      title: "On the Necessity of Physical Notebooks in the AI Era",
-      category: "Philosophy",
-      lastEdited: "Yesterday at 4:30 PM",
-      words: "1,240 words",
-      completion: "70%"
-    },
-    {
-      id: 102,
-      title: "Typography Rules for High-Density Data Interfaces",
-      category: "Design Culture",
-      lastEdited: "3 days ago",
-      words: "860 words",
-      completion: "45%"
-    }
-  ];
+  const publishedStories = [];
+  const drafts = [];
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
@@ -213,84 +161,118 @@ export default function AuthorDashboardPage() {
 
         {/* Tab 1: Published Stories Table */}
         {activeTab === 'published' && (
-          <div className="divide-y divide-divider/60">
-            {publishedStories.map((story) => (
-              <div key={story.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-surface transition-colors">
-                <div className="space-y-1 max-w-xl">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-green-100 text-green-800">
-                      {story.status}
-                    </span>
-                    <span className="text-xs text-text-muted">{story.category}</span>
-                    <span className="text-divider">•</span>
-                    <span className="text-xs text-text-muted">Published {story.publishedDate}</span>
+          publishedStories.length === 0 ? (
+            <div className="p-12 text-center space-y-3">
+              <span className="material-symbols-outlined text-4xl text-text-muted">auto_stories</span>
+              <p className="font-serif font-bold text-lg text-on-surface">No published stories yet</p>
+              <p className="text-xs text-text-muted max-w-sm mx-auto">
+                Start writing your first essay. Your published work and performance metrics will appear here.
+              </p>
+              <Link
+                to="/editor"
+                className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-primary-container transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-sm">edit</span>
+                Write your first story
+              </Link>
+            </div>
+          ) : (
+            <div className="divide-y divide-divider/60">
+              {publishedStories.map((story) => (
+                <div key={story.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-surface transition-colors">
+                  <div className="space-y-1 max-w-xl">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-green-100 text-green-800">
+                        {story.status}
+                      </span>
+                      <span className="text-xs text-text-muted">{story.category}</span>
+                      <span className="text-divider">•</span>
+                      <span className="text-xs text-text-muted">Published {story.publishedDate}</span>
+                    </div>
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-on-surface leading-snug">
+                      <Link to={`/read/${story.id}`} className="hover:text-primary transition-colors">
+                        {story.title}
+                      </Link>
+                    </h3>
                   </div>
-                  <h3 className="font-serif font-bold text-base sm:text-lg text-on-surface leading-snug">
-                    <Link to={`/read/${story.id}`} className="hover:text-primary transition-colors">
-                      {story.title}
-                    </Link>
-                  </h3>
-                </div>
 
-                <div className="flex items-center gap-6 text-right">
-                  <div>
-                    <p className="font-sans font-semibold text-xs text-on-surface">{story.views} Views</p>
-                    <p className="text-[11px] text-text-muted">{story.likes} likes • {story.comments} responses</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-sans font-bold text-xs text-primary">{story.earnings}</p>
-                    <p className="text-[11px] text-text-muted">Royalties</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Link 
-                      to={`/read/${story.id}`}
-                      className="px-3 py-1.5 rounded-lg border border-divider text-xs font-semibold text-on-surface hover:border-primary hover:text-primary transition-all"
-                    >
-                      View
-                    </Link>
-                    <Link 
-                      to="/editor"
-                      className="px-3 py-1.5 rounded-lg bg-surface-container text-xs font-semibold text-on-surface hover:bg-primary hover:text-white transition-all"
-                    >
-                      Edit
-                    </Link>
+                  <div className="flex items-center gap-6 text-right">
+                    <div>
+                      <p className="font-sans font-semibold text-xs text-on-surface">{story.views} Views</p>
+                      <p className="text-[11px] text-text-muted">{story.likes} likes • {story.comments} responses</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-sans font-bold text-xs text-primary">{story.earnings}</p>
+                      <p className="text-[11px] text-text-muted">Royalties</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        to={`/read/${story.id}`}
+                        className="px-3 py-1.5 rounded-lg border border-divider text-xs font-semibold text-on-surface hover:border-primary hover:text-primary transition-all"
+                      >
+                        View
+                      </Link>
+                      <Link
+                        to="/editor"
+                        className="px-3 py-1.5 rounded-lg bg-surface-container text-xs font-semibold text-on-surface hover:bg-primary hover:text-white transition-all"
+                      >
+                        Edit
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )
         )}
 
         {/* Tab 2: Drafts Table */}
         {activeTab === 'drafts' && (
-          <div className="divide-y divide-divider/60">
-            {drafts.map((draft) => (
-              <div key={draft.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-surface transition-colors">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
-                      Draft • {draft.completion}
-                    </span>
-                    <span className="text-xs text-text-muted">{draft.category}</span>
+          drafts.length === 0 ? (
+            <div className="p-12 text-center space-y-3">
+              <span className="material-symbols-outlined text-4xl text-text-muted">edit_note</span>
+              <p className="font-serif font-bold text-lg text-on-surface">No drafts in progress</p>
+              <p className="text-xs text-text-muted max-w-sm mx-auto">
+                Start a new draft and it will appear here. Pick up where you left off, any time.
+              </p>
+              <Link
+                to="/editor"
+                className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-primary-container transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-sm">add</span>
+                Start a new draft
+              </Link>
+            </div>
+          ) : (
+            <div className="divide-y divide-divider/60">
+              {drafts.map((draft) => (
+                <div key={draft.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-surface transition-colors">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                        Draft • {draft.completion}
+                      </span>
+                      <span className="text-xs text-text-muted">{draft.category}</span>
+                    </div>
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-on-surface">
+                      {draft.title}
+                    </h3>
+                    <p className="text-xs text-text-muted">Last edited {draft.lastEdited} • {draft.words}</p>
                   </div>
-                  <h3 className="font-serif font-bold text-base sm:text-lg text-on-surface">
-                    {draft.title}
-                  </h3>
-                  <p className="text-xs text-text-muted">Last edited {draft.lastEdited} • {draft.words}</p>
-                </div>
 
-                <div className="flex items-center gap-3">
-                  <Link
-                    to="/editor"
-                    className="px-4 py-2 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-primary-container transition-all flex items-center gap-1.5"
-                  >
-                    <span className="material-symbols-outlined text-sm">edit</span>
-                    Continue Writing
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <Link
+                      to="/editor"
+                      className="px-4 py-2 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-primary-container transition-all flex items-center gap-1.5"
+                    >
+                      <span className="material-symbols-outlined text-sm">edit</span>
+                      Continue Writing
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )
         )}
       </div>
     </div>

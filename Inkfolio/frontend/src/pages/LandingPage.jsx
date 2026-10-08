@@ -16,58 +16,6 @@ export default function LandingPage() {
       const data = await fetchArticles();
       if (data && data.length > 0) {
         setArticles(data);
-      } else {
-        // Fallback editorial articles
-        setArticles([
-          {
-            id: 1,
-            title: "The Architecture of Deep Focus in the Digital Noise Age",
-            subtitle: "Why cognitive solitude is becoming the rarest intellectual currency of our century.",
-            category: "Deep Dive",
-            read_time: "8 min read",
-            published_date: "Sep 12, 2026",
-            author_name: "Elena Vance",
-            author_role: "Editor in Chief",
-            author_avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-            cover_image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&auto=format&fit=crop&q=80"
-          },
-          {
-            id: 2,
-            title: "Brutalist Design & The Return of Pure Typography",
-            subtitle: "Stripping away digital fluff to prioritize raw editorial narrative and timeless craftsmanship.",
-            category: "Design Culture",
-            read_time: "5 min read",
-            published_date: "Sep 08, 2026",
-            author_name: "Julian Thorne",
-            author_role: "Senior Critic",
-            author_avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-            cover_image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&auto=format&fit=crop&q=80"
-          },
-          {
-            id: 3,
-            title: "Evidence-Based Narratives for an Intentional Life",
-            subtitle: "Exploring wellness, cognitive bandwidth, and slow journalism through scientific rigor.",
-            category: "Health & Philosophy",
-            read_time: "6 min read",
-            published_date: "Aug 30, 2026",
-            author_name: "Sarah Jenks",
-            author_role: "Bioethics Contributor",
-            author_avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
-            cover_image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&auto=format&fit=crop&q=80"
-          },
-          {
-            id: 4,
-            title: "Algorithmic Monoculture and the Human Voice",
-            subtitle: "How generative systems are reshaping modern authorship and why handcrafted essays matter.",
-            category: "Technology",
-            read_time: "7 min read",
-            published_date: "Aug 22, 2026",
-            author_name: "Marcus Sterling",
-            author_role: "Digital Ethicist",
-            author_avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
-            cover_image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80"
-          }
-        ]);
       }
       setLoading(false);
     }
@@ -127,8 +75,8 @@ export default function LandingPage() {
 
           <div className="hidden lg:flex items-center gap-6 text-xs text-text-muted pb-1">
             <div className="text-right">
-              <span className="block font-semibold text-on-surface text-sm">3,400+</span>
-              <span>Subscribed Readers</span>
+              <span className="block font-semibold text-on-surface text-sm">{articles.length > 0 ? `${articles.length}` : '—'}</span>
+              <span>Published Essays</span>
             </div>
             <div className="h-8 w-[1px] bg-divider"></div>
             <div className="text-right">
@@ -415,100 +363,45 @@ export default function LandingPage() {
           {/* Curated Authors Widget */}
           <div className="bg-surface-container-low p-6 rounded-2xl border border-divider space-y-5">
             <div className="flex items-center justify-between">
-              <h3 className="font-serif font-bold text-lg text-on-surface">Curated Voices</h3>
+              <h3 className="font-serif font-bold text-lg text-on-surface">Featured Authors</h3>
               <span className="text-[10px] uppercase font-bold tracking-wider text-accent bg-accent-light px-2 py-0.5 rounded-full border border-accent/20">
                 Staff Picks
               </span>
             </div>
 
-            <div className="space-y-4 divide-y divide-divider/60">
-              {/* Author 1 */}
-              <div className="pt-3 first:pt-0 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" 
-                    className="w-11 h-11 rounded-full object-cover border border-divider" 
-                    alt="Elena Vance" 
-                  />
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <p className="font-semibold text-sm text-on-surface">Elena Vance</p>
-                      <span className="material-symbols-outlined text-primary text-xs" title="Verified Author">verified</span>
+            {articles.length > 0 ? (
+              <div className="space-y-4 divide-y divide-divider/60">
+                {[...new Map(articles.map(a => [a.author_name, a])).values()].slice(0, 3).map((art) => (
+                  <div key={art.author_name} className="pt-3 first:pt-0 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      {art.author_avatar ? (
+                        <img
+                          src={art.author_avatar}
+                          className="w-11 h-11 rounded-full object-cover border border-divider"
+                          alt={art.author_name}
+                        />
+                      ) : (
+                        <div className="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center border border-divider">
+                          <span className="material-symbols-outlined text-xl text-text-muted">person</span>
+                        </div>
+                      )}
+                      <div>
+                        <div className="flex items-center gap-1">
+                          <p className="font-semibold text-sm text-on-surface">{art.author_name}</p>
+                          <span className="material-symbols-outlined text-primary text-xs" title="Verified Author">verified</span>
+                        </div>
+                        <p className="text-xs text-text-muted">{art.category}</p>
+                      </div>
                     </div>
-                    <p className="text-xs text-text-muted">Editor in Chief • Essays</p>
                   </div>
-                </div>
-                <button 
-                  type="button"
-                  onClick={() => toggleFollow('Elena Vance')}
-                  className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-                    followingAuthors['Elena Vance']
-                      ? 'bg-primary text-white'
-                      : 'border border-primary text-primary hover:bg-primary hover:text-white'
-                  }`}
-                >
-                  {followingAuthors['Elena Vance'] ? 'Following' : 'Follow'}
-                </button>
+                ))}
               </div>
-
-              {/* Author 2 */}
-              <div className="pt-3 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80" 
-                    className="w-11 h-11 rounded-full object-cover border border-divider" 
-                    alt="Julian Thorne" 
-                  />
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <p className="font-semibold text-sm text-on-surface">Julian Thorne</p>
-                      <span className="material-symbols-outlined text-primary text-xs" title="Verified Author">verified</span>
-                    </div>
-                    <p className="text-xs text-text-muted">Design & Brutalism</p>
-                  </div>
-                </div>
-                <button 
-                  type="button"
-                  onClick={() => toggleFollow('Julian Thorne')}
-                  className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-                    followingAuthors['Julian Thorne']
-                      ? 'bg-primary text-white'
-                      : 'border border-primary text-primary hover:bg-primary hover:text-white'
-                  }`}
-                >
-                  {followingAuthors['Julian Thorne'] ? 'Following' : 'Follow'}
-                </button>
+            ) : (
+              <div className="py-4 text-center">
+                <span className="material-symbols-outlined text-3xl text-text-muted">group</span>
+                <p className="text-xs text-text-muted mt-1">No authors yet. Be the first to publish!</p>
               </div>
-
-              {/* Author 3 */}
-              <div className="pt-3 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80" 
-                    className="w-11 h-11 rounded-full object-cover border border-divider" 
-                    alt="Sarah Jenks" 
-                  />
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <p className="font-semibold text-sm text-on-surface">Sarah Jenks</p>
-                      <span className="material-symbols-outlined text-primary text-xs" title="Verified Author">verified</span>
-                    </div>
-                    <p className="text-xs text-text-muted">Cognitive Science & Health</p>
-                  </div>
-                </div>
-                <button 
-                  type="button"
-                  onClick={() => toggleFollow('Sarah Jenks')}
-                  className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-                    followingAuthors['Sarah Jenks']
-                      ? 'bg-primary text-white'
-                      : 'border border-primary text-primary hover:bg-primary hover:text-white'
-                  }`}
-                >
-                  {followingAuthors['Sarah Jenks'] ? 'Following' : 'Follow'}
-                </button>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Newsletter Digest Card */}
@@ -544,7 +437,7 @@ export default function LandingPage() {
                   type="submit"
                   className="w-full py-2.5 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-primary-container transition-all"
                 >
-                  Join 3,400+ Readers
+                  Subscribe to the Dispatch
                 </button>
               </form>
             )}

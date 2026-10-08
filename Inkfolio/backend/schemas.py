@@ -7,11 +7,11 @@ class ArticleBase(BaseModel):
     subtitle: Optional[str] = None
     category: Optional[str] = "Essay"
     content: str
-    author_name: Optional[str] = "Elena Vance"
-    author_role: Optional[str] = "Staff Writer & Editor"
+    author_name: Optional[str] = "Author"
+    author_role: Optional[str] = "Contributor"
     author_avatar: Optional[str] = None
     cover_image: Optional[str] = None
-    read_time: Optional[str] = "6 min read"
+    read_time: Optional[str] = "5 min read"
     published: Optional[bool] = True
 
 class ArticleCreate(ArticleBase):
@@ -55,6 +55,17 @@ class UserRegister(BaseModel):
 class UserLogin(BaseModel):
     email: str
     password: str
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+
+class MessageResponse(BaseModel):
+    message: str
+    success: bool = True
 
 class UserAuthResponse(BaseModel):
     id: int

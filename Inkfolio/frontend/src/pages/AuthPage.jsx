@@ -3,13 +3,13 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function AuthPage() {
-  const { login, signup } = useAuth();
+  const { login, signup, forgotPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if we arrived via /signup or /login
+  // Mode: 'login', 'signup', or 'forgot_password'
   const isSignupInit = location.pathname.includes('signup');
-  const [isSignup, setIsSignup] = useState(isSignupInit);
+  const [authMode, setAuthMode] = useState(isSignupInit ? 'signup' : 'login');
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,6 +17,7 @@ export default function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState('author'); // 'author' or 'reader'
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [slowServerNotice, setSlowServerNotice] = useState(false);
 
@@ -25,6 +26,7 @@ export default function AuthPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
 
     const cleanEmail = email.trim();
     const cleanPassword = password.trim();
@@ -34,13 +36,27 @@ export default function AuthPage() {
       return;
     }
 
+    // Forgot Password Flow
+    if (authMode === 'forgot_password') {
+      setIsSubmitting(true);
+      try {
+        await forgotPassword(cleanEmail);
+        setSuccessMessage('If an account exists with this email, a password reset link has been sent to your inbox.');
+      } catch (err) {
+        setError(err.message || 'Unable to process password reset request.');
+      } finally {
+        setIsSubmitting(false);
+      }
+      return;
+    }
+
     if (!cleanPassword) {
       setError('Please enter your password.');
       return;
     }
 
     // Only enforce minimum password length on registration
-    if (isSignup && cleanPassword.length < 6) {
+    if (authMode === 'signup' && cleanPassword.length < 6) {
       setError('Password must be at least 6 characters long.');
       return;
     }
@@ -52,7 +68,7 @@ export default function AuthPage() {
     }, 2500);
 
     try {
-      if (isSignup) {
+      if (authMode === 'signup') {
         if (!name.trim()) {
           clearTimeout(slowTimer);
           setError('Please enter your full name.');
@@ -90,38 +106,57 @@ export default function AuthPage() {
             InkFolio
           </Link>
           <h1 className="font-serif text-2xl font-bold text-on-surface">
-            {isSignup ? 'Create your account' : 'Welcome back'}
+            {authMode === 'forgot_password' 
+              ? 'Reset your password'
+              : authMode === 'signup' 
+                ? 'Create your account' 
+                : 'Welcome back'}
           </h1>
           <p className="font-sans text-xs text-text-muted">
-            {isSignup 
-              ? 'Join our community of thoughtful readers and independent authors' 
-              : 'Enter your credentials to continue reading and writing'}
+            {authMode === 'forgot_password'
+              ? 'Enter your email address and we will send you a secure password reset link.'
+              : authMode === 'signup' 
+                ? 'Join our community of thoughtful readers and independent authors' 
+                : 'Enter your credentials to continue reading and writing'}
           </p>
         </div>
 
-        {/* Tab Toggle */}
-        <div className="flex border-b border-divider">
-          <button
-            type="button"
-            onClick={() => { setIsSignup(false); setError(''); }}
-            className={`flex-1 pb-3 text-sm font-semibold transition-colors relative ${
-              !isSignup ? 'text-primary' : 'text-text-muted hover:text-on-surface'
-            }`}
-          >
-            Log In
-            {!isSignup && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></div>}
-          </button>
-          <button
-            type="button"
-            onClick={() => { setIsSignup(true); setError(''); }}
-            className={`flex-1 pb-3 text-sm font-semibold transition-colors relative ${
-              isSignup ? 'text-primary' : 'text-text-muted hover:text-on-surface'
-            }`}
-          >
-            Sign Up
-            {isSignup && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></div>}
-          </button>
-        </div>
+        {/* Tab Toggle (Only for login and signup) */}
+        {authMode !== 'forgot_password' ? (
+          <div className="flex border-b border-divider">
+            <button
+              type="button"
+              onClick={() => { setAuthMode('login'); setError(''); setSuccessMessage(''); }}
+              className={`flex-1 pb-3 text-sm font-semibold transition-colors relative ${
+                authMode === 'login' ? 'text-primary' : 'text-text-muted hover:text-on-surface'
+              }`}
+            >
+              Log In
+              {authMode === 'login' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></div>}
+            </button>
+            <button
+              type="button"
+              onClick={() => { setAuthMode('signup'); setError(''); setSuccessMessage(''); }}
+              className={`flex-1 pb-3 text-sm font-semibold transition-colors relative ${
+                authMode === 'signup' ? 'text-primary' : 'text-text-muted hover:text-on-surface'
+              }`}
+            >
+              Sign Up
+              {authMode === 'signup' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></div>}
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between pb-2 border-b border-divider text-xs">
+            <button
+              type="button"
+              onClick={() => { setAuthMode('login'); setError(''); setSuccessMessage(''); }}
+              className="text-primary hover:underline flex items-center gap-1 font-medium"
+            >
+              <span className="material-symbols-outlined text-sm">arrow_back</span>
+              Back to Log In
+            </button>
+          </div>
+        )}
 
         {error && (
           <div className="p-3.5 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
@@ -130,9 +165,16 @@ export default function AuthPage() {
           </div>
         )}
 
+        {successMessage && (
+          <div className="p-3.5 text-xs font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-2">
+            <span className="material-symbols-outlined text-base flex-shrink-0 text-emerald-600">check_circle</span>
+            <p>{successMessage}</p>
+          </div>
+        )}
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {isSignup && (
+          {authMode === 'signup' && (
             <div>
               <label className="block text-xs font-semibold text-text-muted uppercase mb-1">
                 Full Name
@@ -141,8 +183,8 @@ export default function AuthPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Elena Vance"
-                required={isSignup}
+                placeholder="e.g. Alex Morgan"
+                required={authMode === 'signup'}
                 className="w-full px-3.5 py-2.5 bg-surface rounded-lg border border-divider text-sm text-on-surface focus:outline-none focus:border-primary transition-all"
               />
             </div>
@@ -162,38 +204,48 @@ export default function AuthPage() {
             />
           </div>
 
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="block text-xs font-semibold text-text-muted uppercase">
-                Password
-              </label>
-              {isSignup && (
-                <span className="text-[11px] text-text-muted">Min 6 characters</span>
-              )}
+          {authMode !== 'forgot_password' && (
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs font-semibold text-text-muted uppercase">
+                  Password
+                </label>
+                {authMode === 'signup' ? (
+                  <span className="text-[11px] text-text-muted">Min 6 characters</span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => { setAuthMode('forgot_password'); setError(''); setSuccessMessage(''); }}
+                    className="text-[11px] text-primary hover:underline font-medium"
+                  >
+                    Forgot password?
+                  </button>
+                )}
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full px-3.5 py-2.5 pr-10 bg-surface rounded-lg border border-divider text-sm text-on-surface focus:outline-none focus:border-primary transition-all"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-on-surface transition-colors"
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  <span className="material-symbols-outlined text-lg">
+                    {showPassword ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
+              </div>
             </div>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="w-full px-3.5 py-2.5 pr-10 bg-surface rounded-lg border border-divider text-sm text-on-surface focus:outline-none focus:border-primary transition-all"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-on-surface transition-colors"
-                title={showPassword ? 'Hide password' : 'Show password'}
-              >
-                <span className="material-symbols-outlined text-lg">
-                  {showPassword ? 'visibility_off' : 'visibility'}
-                </span>
-              </button>
-            </div>
-          </div>
+          )}
 
-          {isSignup ? (
+          {authMode === 'signup' && (
             <div>
               <label className="block text-xs font-semibold text-text-muted uppercase mb-2">
                 I want to join as:
@@ -238,20 +290,6 @@ export default function AuthPage() {
                 </label>
               </div>
             </div>
-          ) : (
-            <div>
-              <label className="block text-xs font-semibold text-text-muted uppercase mb-1">
-                Account Role Preference
-              </label>
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="w-full p-2.5 bg-surface rounded-lg border border-divider text-xs text-on-surface focus:outline-none focus:border-primary"
-              >
-                <option value="author">Author (Has Dashboard & Publishing)</option>
-                <option value="reader">Reader (Reading & Bookmarks)</option>
-              </select>
-            </div>
           )}
 
           <button
@@ -266,12 +304,16 @@ export default function AuthPage() {
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 <span>
                   {slowServerNotice 
-                    ? 'Connecting to server (waking up free tier)...' 
-                    : (isSignup ? 'Creating account...' : 'Validating credentials...')}
+                    ? 'Connecting to server...' 
+                    : (authMode === 'forgot_password' ? 'Sending reset link...' : (authMode === 'signup' ? 'Creating account...' : 'Validating credentials...'))}
                 </span>
               </>
             ) : (
-              <span>{isSignup ? 'Complete Sign Up' : 'Sign In'}</span>
+              <span>
+                {authMode === 'forgot_password' 
+                  ? 'Send Password Reset Link' 
+                  : (authMode === 'signup' ? 'Complete Sign Up' : 'Sign In')}
+              </span>
             )}
           </button>
         </form>

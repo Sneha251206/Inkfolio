@@ -12,6 +12,7 @@ import ReaderProfilePage from './pages/ReaderProfilePage';
 import ProfileVerificationPage from './pages/ProfileVerificationPage';
 import AuthorDashboardPage from './pages/AuthorDashboardPage';
 import AuthPage from './pages/AuthPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminUsersPage from './pages/AdminUsersPage';
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/verification" element={<ProfileVerificationPage />} />
               <Route path="/login" element={<AuthPage />} />
               <Route path="/signup" element={<AuthPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
 
               {/* Protected Author Routes (Only Authors can access) */}
               <Route 

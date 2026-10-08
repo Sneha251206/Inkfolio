@@ -13,6 +13,11 @@ class Settings(BaseSettings):
         "http://localhost:4173,https://inkfolio.sneha251206.workers.dev,"
         "https://inkfolio.onrender.com"
     )
+    # Brevo Transactional Email Configuration
+    BREVO_API_KEY: str = ""
+    BREVO_SENDER_EMAIL: str = "noreply@inkfolio.org"
+    BREVO_SENDER_NAME: str = "InkFolio Editorial"
+    FRONTEND_URL: str = "https://inkfolio.sneha251206.workers.dev"
 
     @property
     def cors_origins_list(self) -> List[str]:

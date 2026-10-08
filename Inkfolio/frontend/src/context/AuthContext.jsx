@@ -1,55 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { loginUser, registerUser } from '../api';
+import { loginUser, registerUser, forgotPasswordApi, resetPasswordApi } from '../api';
 
 const AuthContext = createContext(null);
 
-export const DEMO_ACCOUNTS = {
-  author: {
-    email: "elena@inkfolio.org",
-    password: "elena123",
-    user: {
-      id: 1,
-      name: "Elena Vance",
-      username: "elenavance",
-      email: "elena@inkfolio.org",
-      roleTitle: "Editor in Chief & Author",
-      role: "author",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      bio: "Advocating for brutalist simplicity in an overcomplicated digital world. Writing about deep focus, editorial design, and cognitive autonomy.",
-      is_author: true,
-      is_verified: true,
-      followers_count: 14200,
-      following_count: 180,
-      articles_count: 24
-    }
-  },
-  reader: {
-    email: "clara@example.com",
-    password: "clara123",
-    user: {
-      id: 2,
-      name: "Clara Hughes",
-      username: "clarahughes",
-      email: "clara@example.com",
-      roleTitle: "Standard Reader",
-      role: "reader",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      bio: "Curious mind and passionate essay enthusiast. Exploring philosophy, brutalist architecture, and slow journalism.",
-      is_author: false,
-      is_verified: false,
-      followers_count: 48,
-      following_count: 112,
-      articles_count: 0
-    }
-  }
-};
-
-export const SAMPLE_USERS = {
-  author: DEMO_ACCOUNTS.author.user,
-  reader: DEMO_ACCOUNTS.reader.user
-};
-
-// Retrieve or initialize local offline credentials store
+// Retrieve local offline credentials store (only real users who registered on this browser)
 const getLocalAuthStore = () => {
   try {
     const raw = localStorage.getItem('inkfolio_credential_store');
@@ -57,20 +11,7 @@ const getLocalAuthStore = () => {
   } catch (e) {
     console.error('Failed to parse local auth store:', e);
   }
-  const initialStore = [
-    {
-      email: DEMO_ACCOUNTS.author.email.toLowerCase(),
-      password: DEMO_ACCOUNTS.author.password,
-      user: DEMO_ACCOUNTS.author.user
-    },
-    {
-      email: DEMO_ACCOUNTS.reader.email.toLowerCase(),
-      password: DEMO_ACCOUNTS.reader.password,
-      user: DEMO_ACCOUNTS.reader.user
-    }
-  ];
-  localStorage.setItem('inkfolio_credential_store', JSON.stringify(initialStore));
-  return initialStore;
+  return [];
 };
 
 const saveLocalUser = (email, password, user) => {
@@ -125,7 +66,7 @@ export function AuthProvider({ children }) {
           username: data.username,
           email: data.email,
           roleTitle: data.is_author ? 'Verified Author' : 'Standard Reader',
-          avatar: data.avatar || (data.is_author ? SAMPLE_USERS.author.avatar : SAMPLE_USERS.reader.avatar),
+          avatar: data.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
           bio: data.bio || '',
           is_author: !!data.is_author,
           is_verified: !!data.is_verified,
@@ -138,21 +79,18 @@ export function AuthProvider({ children }) {
           localStorage.setItem('inkfolio_token', data.token);
         }
 
-        // Cache locally for offline availability
         saveLocalUser(cleanEmail, cleanPassword, authenticatedUser);
         setUser(authenticatedUser);
         return authenticatedUser;
       }
     } catch (apiError) {
-      // If the backend actively responded with an authentication rejection (400 or 401)
       if (apiError.response && (apiError.response.status === 401 || apiError.response.status === 400)) {
-        const detail = apiError.response.data?.detail || 'Invalid email or password. Please verify your credentials.';
+        const detail = apiError.response.data?.detail || 'Invalid email or password.';
         throw new Error(detail);
       }
-      // If backend is offline or network error, fallback to verified local credential store
     }
 
-    // 2. Offline fallback: verify against local credentials store (STRICT PASSWORD CHECK)
+    // 2. Offline fallback: verify against local registered users
     const store = getLocalAuthStore();
     const match = store.find(entry => entry.email.toLowerCase() === cleanEmail);
 
@@ -163,18 +101,6 @@ export function AuthProvider({ children }) {
     // Password matches!
     setUser(match.user);
     return match.user;
-  };
-
-  const loginAsAuthor = () => {
-    setUser(DEMO_ACCOUNTS.author.user);
-    localStorage.setItem('inkfolio_token', 'inkfolio_demo_author_token');
-    return DEMO_ACCOUNTS.author.user;
-  };
-
-  const loginAsReader = () => {
-    setUser(DEMO_ACCOUNTS.reader.user);
-    localStorage.setItem('inkfolio_token', 'inkfolio_demo_reader_token');
-    return DEMO_ACCOUNTS.reader.user;
   };
 
   const signup = async ({ name, email, password, is_author }) => {
@@ -208,12 +134,12 @@ export function AuthProvider({ children }) {
           username: data.username,
           email: data.email,
           roleTitle: data.is_author ? 'Verified Author' : 'Standard Reader',
-          avatar: data.avatar,
+          avatar: data.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
           bio: data.bio || '',
           is_author: !!data.is_author,
           is_verified: !!data.is_verified,
           followers_count: 0,
-          following_count: 12,
+          following_count: 0,
           articles_count: 0
         };
 
@@ -228,7 +154,6 @@ export function AuthProvider({ children }) {
       if (apiError.response && apiError.response.status === 400) {
         throw new Error(apiError.response.data?.detail || 'An account with this email already exists.');
       }
-      // If backend is waking up or offline, fallback to local store
     }
 
     // 2. Offline fallback: check local store
@@ -243,20 +168,26 @@ export function AuthProvider({ children }) {
       username: cleanName.toLowerCase().replace(/\s+/g, ''),
       email: cleanEmail,
       roleTitle: is_author ? "Verified Author" : "Standard Reader",
-      avatar: is_author 
-        ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-        : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      bio: is_author ? "New contributor to InkFolio editorial." : "Reader exploring thought-provoking essays.",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      bio: is_author ? "Author on InkFolio." : "Reader exploring essays.",
       is_author: !!is_author,
       is_verified: !!is_author,
       followers_count: 0,
-      following_count: 12,
+      following_count: 0,
       articles_count: 0
     };
 
     saveLocalUser(cleanEmail, cleanPassword, newUser);
     setUser(newUser);
     return newUser;
+  };
+
+  const forgotPassword = async (email) => {
+    return await forgotPasswordApi(email);
+  };
+
+  const resetPassword = async ({ token, new_password }) => {
+    return await resetPasswordApi({ token, new_password });
   };
 
   const becomeAuthor = () => {
@@ -268,8 +199,6 @@ export function AuthProvider({ children }) {
         roleTitle: "Verified Author"
       };
       setUser(updated);
-    } else {
-      setUser(DEMO_ACCOUNTS.author.user);
     }
   };
 
@@ -285,12 +214,11 @@ export function AuthProvider({ children }) {
       isLoggedIn: !!user,
       isAuthor: !!user?.is_author,
       login,
-      loginAsAuthor,
-      loginAsReader,
       signup,
+      forgotPassword,
+      resetPassword,
       becomeAuthor,
-      logout,
-      DEMO_ACCOUNTS
+      logout
     }}>
       {children}
     </AuthContext.Provider>

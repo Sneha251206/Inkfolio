@@ -1,11 +1,14 @@
 import hashlib
 import hmac
 import secrets
+from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from database import get_db
 import models
 import schemas
+from config import settings
+from services.brevo_service import send_password_reset_email
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -31,46 +34,9 @@ def generate_session_token(user_id: int) -> str:
     random_part = secrets.token_urlsafe(32)
     return f"inkfolio_tok_{user_id}_{random_part}"
 
-def seed_default_users_if_empty(db: Session):
-    """Ensure seed demo users exist with valid hashed passwords."""
-    if db.query(models.User).count() == 0:
-        demo_author = models.User(
-            name="Elena Vance",
-            username="elenavance",
-            email="elena@inkfolio.org",
-            hashed_password=hash_password("elena123"),
-            role="author",
-            bio="Advocating for brutalist simplicity in an overcomplicated digital world. Editor in Chief at InkFolio.",
-            avatar="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-            is_author=True,
-            is_verified=True,
-            followers_count=14200,
-            following_count=180,
-            articles_count=24
-        )
-        demo_reader = models.User(
-            name="Clara Hughes",
-            username="clarahughes",
-            email="clara@example.com",
-            hashed_password=hash_password("clara123"),
-            role="reader",
-            bio="Curious mind and passionate essay enthusiast. Exploring philosophy and slow journalism.",
-            avatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-            is_author=False,
-            is_verified=False,
-            followers_count=48,
-            following_count=112,
-            articles_count=0
-        )
-        db.add(demo_author)
-        db.add(demo_reader)
-        db.commit()
-
 @router.post("/register", response_model=schemas.UserAuthResponse, status_code=status.HTTP_201_CREATED)
 @router.post("/register/", response_model=schemas.UserAuthResponse, status_code=status.HTTP_201_CREATED)
 def register(user_data: schemas.UserRegister, db: Session = Depends(get_db)):
-    seed_default_users_if_empty(db)
-    
     clean_email = user_data.email.strip().lower()
     if not clean_email or "@" not in clean_email:
         raise HTTPException(
@@ -116,7 +82,7 @@ def register(user_data: schemas.UserRegister, db: Session = Depends(get_db)):
         is_author=is_author_flag,
         is_verified=is_author_flag,
         followers_count=0,
-        following_count=12,
+        following_count=0,
         articles_count=0
     )
     
@@ -132,8 +98,6 @@ def register(user_data: schemas.UserRegister, db: Session = Depends(get_db)):
 @router.post("/login", response_model=schemas.UserAuthResponse)
 @router.post("/login/", response_model=schemas.UserAuthResponse)
 def login(login_data: schemas.UserLogin, db: Session = Depends(get_db)):
-    seed_default_users_if_empty(db)
-    
     clean_email = login_data.email.strip().lower()
     clean_password = login_data.password.strip()
     
@@ -145,7 +109,6 @@ def login(login_data: schemas.UserLogin, db: Session = Depends(get_db)):
         
     user = db.query(models.User).filter(models.User.email == clean_email).first()
     
-    # Check if user exists and password matches
     if not user or not verify_password(clean_password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -157,10 +120,83 @@ def login(login_data: schemas.UserLogin, db: Session = Depends(get_db)):
     response_obj.token = token
     return response_obj
 
+@router.post("/forgot-password", response_model=schemas.MessageResponse)
+@router.post("/forgot-password/", response_model=schemas.MessageResponse)
+def forgot_password(req: schemas.ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Generate password reset token and send transactional email via Brevo.
+    """
+    clean_email = req.email.strip().lower()
+    if not clean_email or "@" not in clean_email:
+        raise HTTPException(status_code=400, detail="A valid email address is required.")
+        
+    user = db.query(models.User).filter(models.User.email == clean_email).first()
+    
+    if user:
+        # Invalidate previous unused tokens for this user
+        db.query(models.PasswordResetToken).filter(
+            models.PasswordResetToken.user_id == user.id,
+            models.PasswordResetToken.used == False
+        ).update({"used": True})
+        
+        token = secrets.token_urlsafe(32)
+        expires_at = datetime.utcnow() + timedelta(hours=1)
+        
+        reset_record = models.PasswordResetToken(
+            user_id=user.id,
+            token=token,
+            expires_at=expires_at,
+            used=False
+        )
+        db.add(reset_record)
+        db.commit()
+        
+        reset_url = f"{settings.FRONTEND_URL}/reset-password?token={token}"
+        send_password_reset_email(user.email, user.name, reset_url)
+        
+    return schemas.MessageResponse(
+        message="If an account with that email exists, a password reset link has been sent.",
+        success=True
+    )
+
+@router.post("/reset-password", response_model=schemas.MessageResponse)
+@router.post("/reset-password/", response_model=schemas.MessageResponse)
+def reset_password(req: schemas.ResetPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Validate reset token and update user password.
+    """
+    if len(req.new_password.strip()) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters long.")
+        
+    reset_record = db.query(models.PasswordResetToken).filter(
+        models.PasswordResetToken.token == req.token.strip(),
+        models.PasswordResetToken.used == False
+    ).first()
+    
+    if not reset_record:
+        raise HTTPException(status_code=400, detail="Invalid or already used password reset link.")
+        
+    if reset_record.expires_at < datetime.utcnow():
+        reset_record.used = True
+        db.commit()
+        raise HTTPException(status_code=400, detail="Password reset link has expired. Please request a new one.")
+        
+    user = db.query(models.User).filter(models.User.id == reset_record.user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found.")
+        
+    user.hashed_password = hash_password(req.new_password.strip())
+    reset_record.used = True
+    db.commit()
+    
+    return schemas.MessageResponse(
+        message="Your password has been successfully reset. You can now log in with your new password.",
+        success=True
+    )
+
 @router.get("/me", response_model=schemas.UserAuthResponse)
 @router.get("/me/", response_model=schemas.UserAuthResponse)
 def get_me(db: Session = Depends(get_db)):
-    seed_default_users_if_empty(db)
     user = db.query(models.User).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No user found.")

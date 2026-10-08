@@ -10,15 +10,25 @@ class Article(Base):
     subtitle = Column(String(500), nullable=True)
     category = Column(String(100), default="Essay")
     content = Column(Text, nullable=False)
-    author_name = Column(String(100), default="Elena Vance")
-    author_role = Column(String(100), default="Staff Writer & Editor")
+    author_name = Column(String(100), default="Author")
+    author_role = Column(String(100), default="Contributor")
     author_avatar = Column(String(500), nullable=True)
     cover_image = Column(String(500), nullable=True)
-    read_time = Column(String(50), default="6 min read")
+    read_time = Column(String(50), default="5 min read")
     published = Column(Boolean, default=True)
     likes = Column(Integer, default=0)
     bookmarks = Column(Integer, default=0)
     views = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class PasswordResetToken(Base):
+    __tablename__ = "password_reset_tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, index=True, nullable=False)
+    token = Column(String(255), unique=True, index=True, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    used = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class User(Base):
