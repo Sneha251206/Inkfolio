@@ -7,7 +7,8 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  // Generous 60s timeout to allow Render free-tier cold starts to spin up without premature aborts
+  timeout: 60000,
 });
 
 // Attach Authorization header if token exists in localStorage
@@ -20,6 +21,38 @@ api.interceptors.request.use((config) => {
 }, (error) => {
   return Promise.reject(error);
 });
+
+// Automatic retry on timeout or 502-504 gateway wake-up errors for Render cold-starts
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config || config._hasRetried) {
+      return Promise.reject(error);
+    }
+
+    const isWakeupError = 
+      error.code === 'ECONNABORTED' || 
+      !error.response || 
+      (error.response?.status >= 502 && error.response?.status <= 504);
+
+    if (isWakeupError) {
+      config._hasRetried = true;
+      // Wait 2.5 seconds before retrying once while container starts
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      return api(config);
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Ping backend in the background on site load to trigger cold-start immediately
+export const pingBackend = () => {
+  api.get('/health', { timeout: 30000 }).catch(() => {
+    // Non-blocking background keepalive ping
+  });
+};
 
 // Authentication API methods
 export const loginUser = async ({ email, password }) => {
@@ -49,7 +82,6 @@ export const fetchArticles = async () => {
     const response = await api.get('/articles');
     return response.data;
   } catch (error) {
-    console.warn('Backend API offline or unreachable, using local fallback state:', error?.message || error);
     return null;
   }
 };
@@ -59,7 +91,6 @@ export const fetchArticleById = async (id) => {
     const response = await api.get(`/articles/${id}`);
     return response.data;
   } catch (error) {
-    console.warn('Backend API offline, using fallback for article:', id, error?.message || error);
     return null;
   }
 };
@@ -69,7 +100,6 @@ export const createArticle = async (articleData) => {
     const response = await api.post('/articles', articleData);
     return response.data;
   } catch (error) {
-    console.error('Error creating article on backend:', error);
     throw error;
   }
 };
@@ -82,5 +112,10 @@ export const fetchAnalyticsOverview = async () => {
     return null;
   }
 };
+
+// Trigger background ping on module load
+if (typeof window !== 'undefined') {
+  pingBackend();
+}
 
 export default api;

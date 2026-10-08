@@ -18,6 +18,7 @@ export default function AuthPage() {
   const [role, setRole] = useState('author'); // 'author' or 'reader'
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [slowServerNotice, setSlowServerNotice] = useState(false);
 
   const redirectPath = location.state?.from?.pathname || '/';
 
@@ -45,10 +46,15 @@ export default function AuthPage() {
     }
 
     setIsSubmitting(true);
+    setSlowServerNotice(false);
+    const slowTimer = setTimeout(() => {
+      setSlowServerNotice(true);
+    }, 2500);
 
     try {
       if (isSignup) {
         if (!name.trim()) {
+          clearTimeout(slowTimer);
           setError('Please enter your full name.');
           setIsSubmitting(false);
           return;
@@ -63,11 +69,15 @@ export default function AuthPage() {
         await login(cleanEmail, cleanPassword);
       }
 
+      clearTimeout(slowTimer);
       navigate(redirectPath);
     } catch (err) {
+      clearTimeout(slowTimer);
       setError(err.message || 'Invalid email or password.');
     } finally {
+      clearTimeout(slowTimer);
       setIsSubmitting(false);
+      setSlowServerNotice(false);
     }
   };
 
@@ -254,7 +264,11 @@ export default function AuthPage() {
             {isSubmitting ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                <span>Validating credentials...</span>
+                <span>
+                  {slowServerNotice 
+                    ? 'Connecting to server (waking up free tier)...' 
+                    : (isSignup ? 'Creating account...' : 'Validating credentials...')}
+                </span>
               </>
             ) : (
               <span>{isSignup ? 'Complete Sign Up' : 'Sign In'}</span>

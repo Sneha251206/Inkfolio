@@ -150,7 +150,6 @@ export function AuthProvider({ children }) {
         throw new Error(detail);
       }
       // If backend is offline or network error, fallback to verified local credential store
-      console.warn('Backend unavailable during login, verifying credentials via offline security store.');
     }
 
     // 2. Offline fallback: verify against local credentials store (STRICT PASSWORD CHECK)
@@ -229,7 +228,7 @@ export function AuthProvider({ children }) {
       if (apiError.response && apiError.response.status === 400) {
         throw new Error(apiError.response.data?.detail || 'An account with this email already exists.');
       }
-      console.warn('Backend unavailable during registration, saving to local security store.');
+      // If backend is waking up or offline, fallback to local store
     }
 
     // 2. Offline fallback: check local store
